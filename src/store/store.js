@@ -4,7 +4,6 @@ import axios from "axios";
 import {API_URL} from "../http";
 
 export default class Store {
-    user = {}
     isAuth = false
     isLoading = false
 
@@ -16,16 +15,11 @@ export default class Store {
         this.isAuth = bool;
     }
 
-    setUser(user) {
-        this.user = user
-    }
-
     setLoading(bool) {
         this.isLoading = bool
     }
 
     async login(email, password) {
-        console.log(1)
         try {
             const response = await AuthService.login(email, password);
             localStorage.setItem('access', response.data.access)
@@ -54,7 +48,6 @@ export default class Store {
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
             this.setAuth(false)
-            this.setUser({})
         } catch (e) {
             console.log(e.response.message)
         }
