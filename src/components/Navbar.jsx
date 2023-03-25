@@ -4,6 +4,7 @@ import MyModal from "./UI/MyModal/MyModal";
 import LoginForm from "./LoginForm";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
+import MyButton from "./UI/button/MyButton";
 
 const Navbar = () => {
 
@@ -31,11 +32,11 @@ const Navbar = () => {
                     </span>
                     :
                     <div>
-
-                        <button onClick={() => setModal(true)}>Login</button>
+                        <button onClick={() => setModal(true)} className="mr-2">Sign in</button>
                         <MyModal visible={modal} setVisible={setModal}>
                             <LoginForm/>
                         </MyModal>
+                        <Link to="/registration" >Sign up</Link>
                     </div>
                 }
             </div>

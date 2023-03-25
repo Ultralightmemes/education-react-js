@@ -3,6 +3,7 @@ import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 import MyButton from "./UI/button/MyButton";
 import MyInput from "./UI/input/MyInput";
+import {Link} from "react-router-dom";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('')
@@ -28,7 +29,7 @@ const LoginForm = () => {
                 type="password"
                 placeholder="password"
             />
-            <MyButton onClick={login}>Логин</MyButton>
+            <MyButton onClick={login}>Sign in</MyButton>
         </form>
     );
 };

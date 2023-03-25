@@ -1,4 +1,5 @@
-import $api from "../http";
+import $api, {API_URL} from "../http";
+import axios from "axios";
 
 export default class AuthService {
     static async login(email, password) {
@@ -6,7 +7,7 @@ export default class AuthService {
     }
 
     static async registration(user) {
-        return $api.post('user/registration/', {
+        return axios.post(API_URL + 'user/registration/', {
             email: user.email,
             password: user.password,
             first_name: user.firstName,

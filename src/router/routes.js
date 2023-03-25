@@ -4,6 +4,9 @@ import Profile from "../pages/Profile";
 
 export const publicRoutes = [
     {path: '/courses', element: <CourseListPage/>},
-    {path: '/register', element: <Registration/>},
+    {path: '/registration', element: <Registration/>},
+]
+
+export const privateRoutes = [
     {path: '/profile', element: <Profile/>},
 ]
