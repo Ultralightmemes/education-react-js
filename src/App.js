@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import LoginForm from "./components/LoginForm";
+import {useContext, useEffect} from "react";
+import {Context} from "./index";
+import {observer} from "mobx-react-lite";
+import {BrowserRouter} from "react-router-dom";
+import AppRouter from "./router/AppRouter";
+import './App.css'
+import Navbar from "./components/Navbar";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const {store} = useContext(Context)
+    useEffect(() => {
+        if (localStorage.getItem('access')) {
+            store.checkAuth()
+        }
+    }, [])
+
+    if (store.isLoading) {
+        return <div>Загрузка</div>
+    }
+
+    // if (!store.isAuth) {
+    //     return (
+    //         <LoginForm/>
+    //     )
+    // }
+
+    return (
+        <BrowserRouter>
+            <Navbar/>
+            <AppRouter/>
+        </BrowserRouter>
+    );
 }
 
-export default App;
+export default observer(App);
