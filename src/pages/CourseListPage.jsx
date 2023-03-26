@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {useFetching} from "../hooks/useFetching";
 import CourseService from "../services/CourseService";
-import CourseList from "../components/CourseList";
+import CategoriesSidebar from "../components/CategoriesSidebar";
+import CourseCard from "../components/CourseCard";
 
 const CourseListPage = () => {
     const [courses, setCourses] = useState([])
 
-    const [fetchCourses, isCoursesLoading, courseError] = useFetching(async () => {
+    const [fetchCourses, isCoursesLoading, coursesError] = useFetching(async () => {
         const response = await CourseService.getAll();
-        setCourses([...courses, ...response.data])
-        console.log(response)
+        setCourses(response.data)
     })
 
     useEffect(() => {
@@ -17,8 +17,13 @@ const CourseListPage = () => {
     }, [])
 
     return (
-        <div>
-            <CourseList courses={courses}></CourseList>
+        <div className="flex mx-auto max-w-screen-xl pt-5 ml-10">
+            <CategoriesSidebar/>
+            <div className="container ml-5">
+                <div className="max-w-screen-2xl gap-x-20 grid grid-cols-4">
+                    {courses?.map(course => <CourseCard course={course} key={course.id}/>)}
+                </div>
+            </div>
         </div>
     );
 };

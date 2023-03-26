@@ -20,7 +20,6 @@ const Profile = () => {
     const [fetchUser, isUserLoading, userError] = useFetching(async () => {
         const response = await UserService.getUser()
         setUser(response.data)
-        console.log(response)
     })
 
     useEffect(() => {

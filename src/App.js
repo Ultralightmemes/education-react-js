@@ -19,12 +19,6 @@ function App() {
         return <div>Загрузка</div>
     }
 
-    // if (!store.isAuth) {
-    //     return (
-    //         <LoginForm/>
-    //     )
-    // }
-
     return (
         <BrowserRouter>
             <Navbar/>
