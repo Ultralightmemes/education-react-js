@@ -25,7 +25,7 @@ const Navbar = () => {
                 {store.isAuth
                     ?
                     <span className="mr-2">
-                        <Link to="/student/courses" className="mr-1">My Courses</Link>
+                        <Link to="/profile/courses" className="mr-1">My Courses</Link>
                         <Link to="/profile">
                             <button>Profile</button>
                         </Link>
