@@ -19,7 +19,7 @@ const CourseListPage = () => {
     }, [])
 
     return (
-        <div className="flex mx-auto max-w-screen-xl pt-5 ml-10">
+        <div className="flex mx-auto max-w-screen-xl ml-10">
             <CategoriesSidebar/>
             <div className="container ml-5">
                 <MyInput

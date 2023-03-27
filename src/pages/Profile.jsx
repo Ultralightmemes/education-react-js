@@ -118,7 +118,7 @@ const Profile = () => {
                         />
                     </label>
                 </form>
-                <div className="flex justify-between">
+                <div className="flex justify-between mt-2">
                     <MyButton
                         onClick={(e) => updateImage(e)}
                     >

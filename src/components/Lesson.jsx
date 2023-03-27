@@ -7,22 +7,26 @@ import ReactPlayer from "react-player";
 import $api, {API_URL} from "../http";
 import TaskService from "../services/TaskService";
 import Task from "./Task";
+import Loader from "./UI/Loader/Loader";
 
 const Lesson = () => {
     const {id} = useParams()
-    const [lesson, setLesson] = useState({
-        count: null,
-        next: null,
-        previous: null,
-        results: [{
-            id: null,
-            title: '',
-            video: null,
-            position: null,
-            text: '',
-            theme: null,
-        }]
-    })
+    const [lesson, setLesson] = useState(
+        {
+            count: null,
+            next: null,
+            previous: null,
+            results: [{
+                id: null,
+                title: '',
+                video: null,
+                position: null,
+                text: '',
+                theme: null,
+            }
+            ]
+        }
+    )
 
     const [tests, setTests] = useState([])
     const [exercises, setExercises] = useState([])
@@ -105,9 +109,11 @@ const Lesson = () => {
             })
     }
 
+    console.log(lesson)
+
     return (
         <div className="flex">
-            <div className="mr-6 w-3/4">
+            <div className="mr-6 w-3/4 pl-10">
                 {previousURL &&
                     <button
                         onClick={handlePrevClick}
@@ -117,8 +123,13 @@ const Lesson = () => {
                 {nextURL &&
                     <button
                         onClick={handleNextClick}
-                        className="fixed left-3/4 -ml-16 bg-blue-600 w-7 h-14 top-1/2 -mt-10 z-10">
+                        className="fixed left-3/4 bg-blue-600 w-7 h-14 top-1/2 -mt-10 z-10">
                     </button>
+                }
+                {isLessonLoading &&
+                    <div style={{display: 'flex', justifyContent: 'center', marginTop: 50}}>
+                        <Loader/>
+                    </div>
                 }
                 <div className="ml-44 -mt-11">
                     <h1 className="text-3xl">{lesson.results[0].title}</h1>
@@ -138,7 +149,7 @@ const Lesson = () => {
                 </p>
                 <div>
                     <form
-                    onSubmit={formSubmitHandler}>
+                        onSubmit={formSubmitHandler}>
                         {exercises.concat(tests).map(task => <Task task={task} key={task.id}/>)}
                         <div className="right-1/4 mr-6 absolute">
                             <button

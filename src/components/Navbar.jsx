@@ -12,8 +12,8 @@ const Navbar = () => {
     const {store} = useContext(Context)
 
     return (
-        <nav className="h-[50px] flex justify-between px-5 bg-gray-500 items-center text-white ">
-            <div>
+        <header className="h-[50px] flex justify-between px-5 bg-gray-500 items-center bg-white w-full shadow-md mb-5">
+            <div className="">
                 <span className="font-bold mr-2">
                     <Link to="/">Education</Link>
                 </span>
@@ -21,7 +21,7 @@ const Navbar = () => {
                     <Link to="/courses">Courses</Link>
                 </span>
             </div>
-            <div>
+            <div className="mr-48">
                 {store.isAuth
                     ?
                     <span className="mr-2">
@@ -40,7 +40,7 @@ const Navbar = () => {
                     </div>
                 }
             </div>
-        </nav>
+        </header>
     );
 };
 
