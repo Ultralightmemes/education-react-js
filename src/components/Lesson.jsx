@@ -117,13 +117,17 @@ const Lesson = () => {
                 {previousURL &&
                     <button
                         onClick={handlePrevClick}
-                        className="fixed bg-blue-600 w-7 h-14 top-1/2 -mt-10 z-10"
-                    ></button>
+                        className="fixed bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25"
+                    >
+                        <img src="/keyboard-left-arrow-button_icon-icons.com_72692.png"/>
+                    </button>
                 }
                 {nextURL &&
                     <button
                         onClick={handleNextClick}
-                        className="fixed left-3/4 bg-blue-600 w-7 h-14 top-1/2 -mt-10 z-10">
+                        className="fixed left-3/4 bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25"
+                    >
+                        <img src="/keyboard-right-arrow-button_icon-icons.com_72691.png"/>
                     </button>
                 }
                 {isLessonLoading &&
