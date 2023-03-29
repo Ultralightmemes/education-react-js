@@ -26,8 +26,9 @@ const CourseListPage = () => {
                     value={searchQuery}
                     onChange={e => setSearchQuery(e.target.value)}
                     placeholder="Поиск..."
+                    style={{width: '104%'}}
                 />
-                <div className="max-w-screen-2xl gap-x-20 grid grid-cols-4">
+                <div className="max-w-screen-2xl gap-x-20 grid grid-cols-3">
                     {courses?.map(course => <CourseCard course={course} key={course.id}/>)}
                 </div>
             </div>

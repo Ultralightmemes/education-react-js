@@ -8,7 +8,7 @@ const CourseCard = ({course}) => {
     return (
         <div>
             <Link to={'/preview/' + course.id}>
-                <div className="rounded overflow-hidden shadow-lg h-72 w-64">
+                <div className="rounded overflow-hidden shadow-lg h-72 w-80">
                     <img className="h-44 w-44 mx-auto mt-2"
                          src={course.image}
                          alt="CourseCard"
@@ -18,12 +18,18 @@ const CourseCard = ({course}) => {
                     <div className="px-6 py-4">
                         <div className="text-xl">
                             <p className="whitespace-normal text-lg text-center">
-                                {course.name.substring(0, 25)}
+                                {
+                                    course.name.length > 25
+                                        ?
+                                        course.name.substring(0, 25) + '...'
+                                        :
+                                        course.name
+                                }
                             </p>
                         </div>
                     </div>
                     <div className="px-6 pb-2">
-                        {course.categories.slice(0, 1).map(category =>
+                        {course.categories.slice(0, 2).map(category =>
                             <span
                                 key={category.id}
                                 className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold
