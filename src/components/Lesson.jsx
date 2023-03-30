@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useFetching} from "../hooks/useFetching";
 import LessonService from "../services/LessonService";
 import {useParams} from "react-router-dom";
@@ -8,6 +8,7 @@ import $api, {API_URL} from "../http";
 import TaskService from "../services/TaskService";
 import Task from "./Task";
 import Loader from "./UI/Loader/Loader";
+import {Context} from "../index";
 
 const Lesson = () => {
     const {id} = useParams()
@@ -33,12 +34,14 @@ const Lesson = () => {
     const [previousURL, setPreviousURL] = useState(null)
     const [nextURL, setNextURL] = useState(null)
     const [currentPage, setCurrentPage] = useState(1)
+    const {store} = useContext(Context)
 
     const [fetchLesson, isLessonLoading, lessonError] = useFetching(async () => {
         const response = await LessonService.getLesson(id, currentPage)
         setLesson(response.data)
         setPreviousURL(response.data.previous)
         setNextURL(response.data.next)
+        store.setTitle(response.data.results[0].title)
     })
 
     const [fetchTests, isTestsLoading, testsError] = useFetching(async () => {
@@ -55,7 +58,16 @@ const Lesson = () => {
         fetchLesson()
         fetchTests()
         fetchExercises()
+
+        console.log(1)
+
+        console.log(store.title)
+
+        return () => {
+            store.delTitle()
+        };
     }, [currentPage])
+
 
     function handlePrevClick() {
         if (previousURL) {
@@ -113,11 +125,11 @@ const Lesson = () => {
 
     return (
         <div className="flex">
-            <div className="mr-6 w-3/4 pl-10">
+            <div className="mr-6 w-3/4 pl-10 flex flex-col pr-5">
                 {previousURL &&
                     <button
                         onClick={handlePrevClick}
-                        className="fixed bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25"
+                        className="fixed bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25 -ml-3"
                     >
                         <img src="/keyboard-left-arrow-button_icon-icons.com_72692.png"/>
                     </button>
@@ -125,7 +137,7 @@ const Lesson = () => {
                 {nextURL &&
                     <button
                         onClick={handleNextClick}
-                        className="fixed left-3/4 bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25"
+                        className="fixed left-3/4 bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25 -ml-5"
                     >
                         <img src="/keyboard-right-arrow-button_icon-icons.com_72691.png"/>
                     </button>
@@ -135,14 +147,11 @@ const Lesson = () => {
                         <Loader/>
                     </div>
                 }
-                <div className="ml-44 -mt-11">
-                    <h1 className="text-3xl">{lesson.results[0].title}</h1>
-                </div>
-                {lesson.results[0].video && <div className="inline z-0">
+                {lesson.results[0].video && <div className="inline z-0 relative w-full h-1/2 ml-4">
                     <ReactPlayer
-                        className="mt-2"
-                        width="1150px"
-                        height="647px"
+                        width="100%"
+                        height="100%"
+                        className="w-full"
                         url={API_URL.substring(0, API_URL.length - 1) + lesson.results[0].video}
                         controls={true}
                         config={{file: {attributes: {controlsList: 'nodownload'}}}}

@@ -8,7 +8,7 @@ const CourseCard = ({course}) => {
     return (
         <div>
             <Link to={'/preview/' + course.id}>
-                <div className="rounded overflow-hidden shadow-lg h-72 w-80">
+                <div className="rounded overflow-hidden shadow-lg h-72 w-80 mb-3">
                     <img className="h-44 w-44 mx-auto mt-2"
                          src={course.image}
                          alt="CourseCard"
@@ -28,12 +28,12 @@ const CourseCard = ({course}) => {
                             </p>
                         </div>
                     </div>
-                    <div className="px-6 pb-2">
+                    <div className="px-6 pb-2 max-w-fit max-h-min">
                         {course.categories.slice(0, 2).map(category =>
                             <span
                                 key={category.id}
                                 className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold
-                                text-gray-700 mr-2 mb-2"
+                                text-gray-700 mr-2 mb-5"
                             >
                                 {category.name}</span>
                         )}

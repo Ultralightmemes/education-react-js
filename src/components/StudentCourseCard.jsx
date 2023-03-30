@@ -9,7 +9,7 @@ const StudentCourseCard = ({course}) => {
     return (
         <div>
             <Link to={'/course/' + course.id + '/lesson'}>
-                <div className="rounded overflow-hidden shadow-lg h-72 w-64">
+                <div className="rounded overflow-hidden shadow-lg h-72 w-80 mb-3">
                     <img className="h-44 w-44 mx-auto mt-2"
                          src={course.image}
                          alt="CourseCard"

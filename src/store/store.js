@@ -6,6 +6,7 @@ import {API_URL} from "../http";
 export default class Store {
     isAuth = false
     isLoading = false
+    title = null
 
     constructor() {
         makeAutoObservable(this);
@@ -17,6 +18,14 @@ export default class Store {
 
     setLoading(bool) {
         this.isLoading = bool
+    }
+
+    delTitle() {
+        this.title = null
+    }
+
+    setTitle(title) {
+        this.title = title
     }
 
     async login(email, password) {

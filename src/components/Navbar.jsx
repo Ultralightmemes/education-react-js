@@ -20,6 +20,7 @@ const Navbar = () => {
                 <span>
                     <Link to="/courses">Courses</Link>
                 </span>
+                <span className="ml-5 text-2xl">{store.title}</span>
             </div>
             <div className="mr-48">
                 {store.isAuth
