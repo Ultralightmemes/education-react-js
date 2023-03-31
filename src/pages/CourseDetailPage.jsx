@@ -50,11 +50,14 @@ const CourseDetailPage = () => {
     }
 
     return (
-        <div className="w-max ml-8">
-            <div className="container mx-auto gap-x-8 grid grid-cols-3 mt-16 w-11/12">
-                <div className="border-2">
+        <div className="w-full">
+            <div className="w-full text-center">
+                <h1 className="text-3xl">{course.name}</h1>
+            </div>
+            <div className="container mx-auto gap-x-8 grid grid-cols-3 mt-4 w-11/12">
+                <div className="border-2 rounded-xl shadow-lg">
                     <img src={API_URL.substring(0, API_URL.length - 1) + course.image}
-                         className="mx-auto"
+                         className="mx-auto rounded-t-xl"
                          onError={handleImageError}
                     />
                     <div className="mt-2">
@@ -67,12 +70,12 @@ const CourseDetailPage = () => {
                         <h3 className="m-2">Последнее обновление: {course.update_date}</h3>
                     </div>
                 </div>
-                <div className="border-2 flex text-center items-center justify-center">
+                <div className="border-2 flex text-center items-center justify-center rounded-xl shadow-lg">
                     <h2 className="text-lg w-full text-justify mx-2">
                         {course.text}
                     </h2>
                 </div>
-                <div className="border-2">
+                <div className="border-2 rounded-xl shadow-lg">
                     {course.themes.map(theme =>
                         <ThemeTab theme={theme} key={theme.id}/>
                     )}
@@ -81,7 +84,7 @@ const CourseDetailPage = () => {
             <div className="max-w flex flex-col items-center m-6">
                 <button
                     onClick={followCourse}
-                    className="w-5/12 bg-red-800 rounded-2xl h-24"
+                    className="w-5/12 hover:shadow-purple-100 hover:shadow-xl rounded-2xl h-24"
                 >
                     <h2 className="text-4xl">
                         Подписаться
