@@ -2,15 +2,16 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useFetching} from "../hooks/useFetching";
 import LessonService from "../services/LessonService";
 import {useParams} from "react-router-dom";
-import SideThemes from "./SideThemes";
+import SideThemes from "../components/SideThemes";
 import ReactPlayer from "react-player";
 import $api, {API_URL} from "../http";
 import TaskService from "../services/TaskService";
-import Task from "./Task";
-import Loader from "./UI/Loader/Loader";
+import Task from "../components/Task";
+import Loader from "../components/UI/Loader/Loader";
 import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const Lesson = () => {
+const Lesson = observer(() => {
     const {id} = useParams()
     const [lesson, setLesson] = useState(
         {
@@ -28,16 +29,18 @@ const Lesson = () => {
             ]
         }
     )
-
+    const {store} = useContext(Context)
     const [tests, setTests] = useState([])
     const [exercises, setExercises] = useState([])
     const [previousURL, setPreviousURL] = useState(null)
     const [nextURL, setNextURL] = useState(null)
-    const [currentPage, setCurrentPage] = useState(1)
-    const {store} = useContext(Context)
+    const [currentPage, setCurrentPage] = useState(store.lesson)
+
 
     const [fetchLesson, isLessonLoading, lessonError] = useFetching(async () => {
-        const response = await LessonService.getLesson(id, currentPage)
+        console.log(1)
+        console.log(currentPage)
+        const response = await LessonService.getLesson(id, store.lesson)
         setLesson(response.data)
         setPreviousURL(response.data.previous)
         setNextURL(response.data.next)
@@ -45,12 +48,12 @@ const Lesson = () => {
     })
 
     const [fetchTests, isTestsLoading, testsError] = useFetching(async () => {
-        const response = await TaskService.getTests(id)
+        const response = await TaskService.getTests(lesson.id)
         setTests(response.data)
     })
 
     const [fetchExercises, isExercisesLoading, exercisesError] = useFetching(async () => {
-        const response = await TaskService.getExercises(id)
+        const response = await TaskService.getExercises(lesson.id)
         setExercises(response.data)
     })
 
@@ -59,25 +62,21 @@ const Lesson = () => {
         fetchTests()
         fetchExercises()
 
-        console.log(1)
-
-        console.log(store.title)
-
         return () => {
             store.delTitle()
         };
-    }, [currentPage])
+    }, [currentPage, store.lesson])
 
 
     function handlePrevClick() {
         if (previousURL) {
-            setCurrentPage(currentPage - 1);
+            store.setLesson(store.lesson - 1);
         }
     }
 
     function handleNextClick() {
         if (nextURL) {
-            setCurrentPage(currentPage + 1);
+            store.setLesson(store.lesson + 1);
         }
     }
 
@@ -121,11 +120,9 @@ const Lesson = () => {
             })
     }
 
-    console.log(lesson)
-
     return (
-        <div className="flex">
-            <div className="mr-6 w-3/4 pl-10 flex flex-col pr-5">
+        <div className="flex ml-10">
+            <div className="mr-6 w-3/4 flex flex-col pr-5">
                 {previousURL &&
                     <button
                         onClick={handlePrevClick}
@@ -137,7 +134,7 @@ const Lesson = () => {
                 {nextURL &&
                     <button
                         onClick={handleNextClick}
-                        className="fixed left-3/4 bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25 -ml-5"
+                        className="fixed left-3/4 bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25 -ml-3"
                     >
                         <img src="/keyboard-right-arrow-button_icon-icons.com_72691.png"/>
                     </button>
@@ -151,20 +148,22 @@ const Lesson = () => {
                     <ReactPlayer
                         width="100%"
                         height="100%"
-                        className="w-full"
+                        className="w-full border"
                         url={API_URL.substring(0, API_URL.length - 1) + lesson.results[0].video}
                         controls={true}
                         config={{file: {attributes: {controlsList: 'nodownload'}}}}
                     />
                 </div>}
-                <p className="text-justify text-xl mt-3 -ml-6 indent-12 mx-auto text-center">
+                <p className="text-justify text-xl mt-5 ml-8 indent-12 mx-auto text-center">
                     {lesson.results[0].text}
                 </p>
                 <div>
                     <form
-                        onSubmit={formSubmitHandler}>
+                        onSubmit={formSubmitHandler}
+                        className="-ml-2"
+                    >
                         {exercises.concat(tests).map(task => <Task task={task} key={task.id}/>)}
-                        <div className="right-1/4 mr-6 absolute">
+                        <div className="right-1/4 mr-7 absolute">
                             <button
                                 className="mt-2 p-2 text-xl border-2 border-white bg-blue-600 rounded-lg"
                                 type="submit">Submit
@@ -176,6 +175,6 @@ const Lesson = () => {
             <SideThemes id={id}/>
         </div>
     );
-};
+});
 
 export default Lesson;

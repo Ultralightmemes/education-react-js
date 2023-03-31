@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import {Context} from "../index";
 
 const LessonComponent = ({lesson}) => {
-
+    const {store} = useContext(Context)
     return (
         <li>
-            {/*<Link to={'/courses/' + course_id + '/lesson/' + lesson.id} reloadDocument={true}>*/}
-                <div
+            <button>
+                <div onClick={() => store.setLesson(lesson.index)}
                     className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white'
                 >
                     <span className="ml-3">{lesson.title}</span>
@@ -17,7 +18,7 @@ const LessonComponent = ({lesson}) => {
                     {/*                   onChange={formSubmitHandler} onClick={() => setIsDone(true)}/>}*/}
                     {/*    </span>) : null}*/}
                 </div>
-            {/*</Link>*/}
+            </button>
         </li>
     );
 };

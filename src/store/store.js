@@ -7,6 +7,7 @@ export default class Store {
     isAuth = false
     isLoading = false
     title = null
+    lesson = 1
 
     constructor() {
         makeAutoObservable(this);
@@ -26,6 +27,14 @@ export default class Store {
 
     setTitle(title) {
         this.title = title
+    }
+
+    setLesson(lesson) {
+        this.lesson = lesson
+    }
+
+    delLesson() {
+        this.lesson = 1
     }
 
     async login(email, password) {

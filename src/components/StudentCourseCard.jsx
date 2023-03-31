@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
+import {Context} from "../index";
 
 const StudentCourseCard = ({course}) => {
+    const {store} = useContext(Context)
 
     const handleImageError = (event) => {
         event.target.src = '/No_image_available.svg.png';
     };
     return (
         <div>
-            <Link to={'/course/' + course.id + '/lesson'}>
+            <Link to={'/course/' + course.id + '/lesson'} onClick={() => store.delLesson()}>
                 <div className="rounded overflow-hidden shadow-lg h-72 w-80 mb-3">
                     <img className="h-44 w-44 mx-auto mt-2"
                          src={course.image}
