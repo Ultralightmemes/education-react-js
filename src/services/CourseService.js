@@ -1,8 +1,8 @@
 import $api from "../http";
 
 export default class CourseService {
-    static async getAll() {
-        return $api.get('education/course/')
+    static async getAll(ordering='', search='') {
+        return $api.get(`education/course/?ordering=${ordering}&search=${search}`)
     }
 
     static async getById(id) {
