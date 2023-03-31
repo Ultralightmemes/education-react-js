@@ -4,12 +4,11 @@ import LessonService from "../services/LessonService";
 import {useParams} from "react-router-dom";
 import SideThemes from "../components/SideThemes";
 import ReactPlayer from "react-player";
-import $api, {API_URL} from "../http";
-import TaskService from "../services/TaskService";
-import Task from "../components/Task";
+import {API_URL} from "../http";
 import Loader from "../components/UI/Loader/Loader";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
+import Tasks from "../components/Tasks";
 
 const Lesson = observer(() => {
     const {id} = useParams()
@@ -30,16 +29,12 @@ const Lesson = observer(() => {
         }
     )
     const {store} = useContext(Context)
-    const [tests, setTests] = useState([])
-    const [exercises, setExercises] = useState([])
     const [previousURL, setPreviousURL] = useState(null)
     const [nextURL, setNextURL] = useState(null)
     const [currentPage, setCurrentPage] = useState(store.lesson)
 
 
     const [fetchLesson, isLessonLoading, lessonError] = useFetching(async () => {
-        console.log(1)
-        console.log(currentPage)
         const response = await LessonService.getLesson(id, store.lesson)
         setLesson(response.data)
         setPreviousURL(response.data.previous)
@@ -47,20 +42,8 @@ const Lesson = observer(() => {
         store.setTitle(response.data.results[0].title)
     })
 
-    const [fetchTests, isTestsLoading, testsError] = useFetching(async () => {
-        const response = await TaskService.getTests(lesson.id)
-        setTests(response.data)
-    })
-
-    const [fetchExercises, isExercisesLoading, exercisesError] = useFetching(async () => {
-        const response = await TaskService.getExercises(lesson.id)
-        setExercises(response.data)
-    })
-
     useEffect(() => {
         fetchLesson()
-        fetchTests()
-        fetchExercises()
 
         return () => {
             store.delTitle()
@@ -78,46 +61,6 @@ const Lesson = observer(() => {
         if (nextURL) {
             store.setLesson(store.lesson + 1);
         }
-    }
-
-    const formSubmitHandler = (e) => {
-        e.preventDefault()
-        let exercises_answers = []
-        let raw_exercises = document.getElementsByClassName('ExerciseTask')
-        const emptyExercise = () => ({
-            id: '',
-            answer: '',
-        });
-        for (let i = 0; i < raw_exercises.length; i++) {
-            let exercise = emptyExercise()
-            exercise.id = raw_exercises[i].id
-            exercise.answer = (raw_exercises[i]).value
-            exercises_answers.push(exercise)
-        }
-        // console.log(exercises)
-        let tests_answers = []
-        let raw_tests = document.getElementsByClassName('TestTask')
-        const emptyTests = () => ({
-            id: '',
-            answers: [],
-        });
-        for (let i = 0; i < raw_tests.length; i++) {
-            let test = emptyTests()
-            test.id = raw_tests[i].id
-            let options = raw_tests[i].getElementsByTagName("input")
-            for (let k = 0; k < options.length; k++) {
-                if ((options[k]).checked) {
-                    test.answers.push(options[k].id)
-                }
-            }
-            tests_answers.push(test)
-        }
-        let response = $api.post(`education/lesson/${id}/answer/`,
-            {
-                lesson: lesson?.id,
-                exercises: exercises_answers,
-                tests: tests_answers
-            })
     }
 
     return (
@@ -158,18 +101,7 @@ const Lesson = observer(() => {
                     {lesson.results[0].text}
                 </p>
                 <div>
-                    <form
-                        onSubmit={formSubmitHandler}
-                        className="-ml-2"
-                    >
-                        {exercises.concat(tests).map(task => <Task task={task} key={task.id}/>)}
-                        <div className="right-1/4 mr-7 absolute">
-                            <button
-                                className="mt-2 p-2 text-xl border-2 border-white bg-blue-600 rounded-lg"
-                                type="submit">Submit
-                            </button>
-                        </div>
-                    </form>
+                    <Tasks id={lesson.results[0].id}/>
                 </div>
             </div>
             <SideThemes id={id}/>
