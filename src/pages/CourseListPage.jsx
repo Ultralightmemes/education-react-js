@@ -33,7 +33,7 @@ const CourseListPage = observer(() => {
                         <option value={'publish_date'}> По дате публикации</option>
                         <option value={'update_date'}>По дате обновления</option>
                     </select>
-                    <div className="relative ml-3 w-full -mr-4">
+                    <div className="relative ml-3 w-full">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none"
                                  stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +62,7 @@ const CourseListPage = observer(() => {
                         </button>
                     </div>
                 </div>
-                <div className="max-w-screen-2xl gap-x-20 grid grid-cols-3">
+                <div className="max-w-screen-2xl gap-x-10 grid grid-cols-3">
                     {courses?.map(course => <CourseCard course={course} key={course.id}/>)}
                 </div>
             </div>

@@ -84,7 +84,7 @@ const CourseDetailPage = () => {
             <div className="max-w flex flex-col items-center m-6">
                 <button
                     onClick={followCourse}
-                    className="w-5/12 hover:shadow-purple-100 hover:shadow-xl rounded-2xl h-24"
+                    className="w-5/12 hover:shadow-blue-500 hover:shadow-sm rounded-2xl h-24 border border-black"
                 >
                     <h2 className="text-4xl">
                         Подписаться

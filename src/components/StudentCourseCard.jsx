@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
 import {Context} from "../index";
+import MyProgress from "./UI/progress/MyProgress";
 
 const StudentCourseCard = ({course}) => {
     const {store} = useContext(Context)
@@ -26,14 +27,10 @@ const StudentCourseCard = ({course}) => {
                         </div>
                     </div>
                     <div className="px-6 pb-2">
-                        {course.categories.slice(0, 1).map(category =>
-                            <span
-                                key={category.id}
-                                className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold
-                                text-gray-700 mr-2 mb-2"
-                            >
-                                {category.name}</span>
-                        )}
+                        <MyProgress
+                            value={course.percents}
+                            max={100}
+                        />
                     </div>
                 </div>
             </Link>
