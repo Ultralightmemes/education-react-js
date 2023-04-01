@@ -16,4 +16,8 @@ export default class CourseService {
     static async followCourse(id) {
         return $api.post(`education/course/${id}/follow/`)
     }
+
+    static async rateCourse(id, rating) {
+        return $api.post(`education/course/${id}/rate/`, {rating})
+    }
 }

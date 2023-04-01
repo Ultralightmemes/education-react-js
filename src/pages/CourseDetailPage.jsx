@@ -4,7 +4,7 @@ import CourseService from "../services/CourseService";
 import {useParams} from "react-router-dom";
 import {API_URL} from "../http";
 import ThemeTab from "../components/ThemeTab";
-import MyButton from "../components/UI/button/MyButton";
+import Rating from "../components/Rating";
 
 const CourseDetailPage = () => {
     const {id} = useParams()
@@ -91,6 +91,11 @@ const CourseDetailPage = () => {
                     </h2>
                 </button>
             </div>
+            <Rating
+                courseRating={course.rating}
+                isActive={false}
+                courseId={course.id}
+            />
         </div>
     );
 };
