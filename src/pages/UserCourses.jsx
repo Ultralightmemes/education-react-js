@@ -9,7 +9,6 @@ const UserCourses = () => {
     const [fetchCourses, isCoursesLoading, coursesError] = useFetching(async () => {
         const response = await CourseService.getMy();
         setCourses(response.data)
-        console.log(response.data)
     })
 
     useEffect(() => {

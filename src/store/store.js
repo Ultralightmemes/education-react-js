@@ -81,7 +81,6 @@ export default class Store {
             localStorage.setItem('access', response.data.access)
             localStorage.setItem('refresh', response.data.refresh)
             this.setAuth(true)
-            console.log(this.isAuth)
         } catch (e) {
             console.log(e.response.message)
         } finally {

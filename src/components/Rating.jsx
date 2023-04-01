@@ -67,11 +67,11 @@ const Rating = ({courseId, courseRating, isActive}) => {
             <div className="rating__body">
                 <div className="rating__active"></div>
                 <div className="rating__items">
-                    <input type="radio" name="rating" value="1" className="rating__item"/>
-                    <input type="radio" name="rating" value="2" className="rating__item"/>
-                    <input type="radio" name="rating" value="3" className="rating__item"/>
-                    <input type="radio" name="rating" value="4" className="rating__item"/>
-                    <input type="radio" name="rating" value="5" className="rating__item"/>
+                    <input type="radio" name="rating" id={courseId + 1} value="1" className="rating__item"/>
+                    <input type="radio" name="rating" id={courseId + 2} value="2" className="rating__item"/>
+                    <input type="radio" name="rating" id={courseId + 3} value="3" className="rating__item"/>
+                    <input type="radio" name="rating" id={courseId + 4} value="4" className="rating__item"/>
+                    <input type="radio" name="rating" id={courseId + 5} value="5" className="rating__item"/>
                 </div>
             </div>
         </div>
