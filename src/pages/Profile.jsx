@@ -49,7 +49,7 @@ const Profile = () => {
         "focus:invalid:ring-pink-500"
     return (
         <div className="flex justify-center items-center">
-            <div className="w-1/5">
+            <div className="w-1/5 mb-2">
                 {
                     user.image
                         ?
@@ -137,6 +137,18 @@ const Profile = () => {
                         Logout
                     </MyButton>
                 </div>
+            </div>
+            <div className="w-1/5">
+                <button
+                    className="block w-5/6 mx-auto h-14 mb-2 border border-teal-500"
+                >
+                    Создать курс
+                </button>
+                <button
+                    className="block w-5/6 mx-auto h-14 border border-teal-500"
+                >
+                    Мои курсы
+                </button>
             </div>
         </div>
     );

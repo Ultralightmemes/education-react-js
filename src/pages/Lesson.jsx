@@ -62,6 +62,7 @@ const Lesson = observer(() => {
             store.setLesson(store.lesson + 1);
         }
     }
+    console.log(lesson)
 
     return (
         <div className="flex ml-10">

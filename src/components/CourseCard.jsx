@@ -5,6 +5,7 @@ const CourseCard = ({course}) => {
     const handleImageError = (event) => {
         event.target.src = '/No_image_available.svg.png';
     };
+    console.log(course)
     return (
         <div>
             <Link to={'/preview/' + course.id}>

@@ -18,13 +18,6 @@ const LessonComponent = ({lesson}) => {
                 className={className}
             >
                 <span className="ml-5">{lesson.title}</span>
-                {/*{lesson.is_auto_done ? (*/}
-                {/*    <span className="ml-auto mr-0">*/}
-                {/*        {lesson.is_done ?*/}
-                {/*            <input type="checkbox" className="object-right" disabled checked={is_done}/> :*/}
-                {/*            <input type="checkbox" className="object-right" checked={is_done}*/}
-                {/*                   onChange={formSubmitHandler} onClick={() => setIsDone(true)}/>}*/}
-                {/*    </span>) : null}*/}
             </div>
             <hr className="ml-3 border-gray-400 w-11/12"/>
         </li>
