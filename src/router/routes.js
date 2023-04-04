@@ -5,6 +5,7 @@ import CourseDetailPage from "../pages/CourseDetailPage";
 import UserCourses from "../pages/UserCourses";
 import Lesson from "../pages/Lesson";
 import CategoryPage from "../pages/CategoryPage";
+import TeacherCourses from "../pages/TeacherCourses";
 
 export const publicRoutes = [
     {path: '/courses', element: <CourseListPage/>},
@@ -18,4 +19,5 @@ export const privateRoutes = [
     {path: '/profile/courses', element: <UserCourses/>},
     {path: '/course/:id/lesson', element: <Lesson/>},
     {path: '/course/:id/lesson/:lesson_id', element: <Lesson/>},
+    {path: 'teacher/courses', element: <TeacherCourses/>},
 ]

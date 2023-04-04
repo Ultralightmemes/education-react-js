@@ -20,4 +20,8 @@ export default class CourseService {
     static async rateCourse(id, rating) {
         return $api.post(`education/course/${id}/rate/`, {rating})
     }
+
+    static async getTeacherCourses() {
+        return $api.get('teacher/course/')
+    }
 }
