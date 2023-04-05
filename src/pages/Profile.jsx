@@ -44,106 +44,112 @@ const Profile = () => {
         const response = await UserService.updateImage(image)
     }
 
-    const input_style = "mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm" +
-        " placeholder-slate-400focus:outline-none focus:border-sky-500 focus:ring-1 " +
-        "focus:ring-sky-500invalid:border-pink-500 invalid:text-pink-600focus:invalid:border-pink-500 " +
-        "focus:invalid:ring-pink-500"
+    const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
+        "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " +
+        "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     return (
         <div className="flex justify-center items-center">
-            <div className="w-1/5 mb-2">
+            <div className="w-2/5">
                 {
                     user.image
                         ?
-                        <img src={user.image} alt="Profile"/>
+                        <img src={user.image} className="w-72 h-72 mx-auto" alt="Profile"/>
                         :
-                        <img src="/user.png" alt="Profile"/>
+                        <img src="/user.png" className="w-72 h-72 mx-auto" alt="Profile"/>
                 }
-
                 <form>
-                    <label className="block text-sm font-medium text-gray-900 dark:text-white">
-                        Upload file
-                    </label>
-                    <input
-                        className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer
-                    bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
-                    dark:placeholder-gray-400"
-                        type="file"
-                        onChange={(event) => setImage(event.target.files[0])}
-                    />
-                    <label className="block">
-                        <span className="block text-sm font-medium text-slate-700">Email</span>
-                        <input type="text"
-                               onChange={e => setUser({...user, email: e.target.value})}
-                               defaultValue={user.email}
-                               className={input_style}
-                        />
-                    </label>
-                    <label className="block">
-                        <span className="block text-sm font-medium text-slate-700">First Name</span>
-                        <input type="text"
-                               onChange={e => setUser({...user, first_name: e.target.value})}
-                               defaultValue={user.first_name}
-                               className={input_style}
-                        />
-                    </label>
-                    <label className="block">
-                        <span className="block text-sm font-medium text-slate-700">Last Name</span>
-                        <input type="text"
-                               onChange={e => setUser({...user, last_name: e.target.value})}
-                               defaultValue={user.last_name}
-                               className={input_style}
-                        />
-                    </label>
-                    <label className="block">
-                        <span className="block text-sm font-medium text-slate-700">Patronymic</span>
-                        <input type="text"
-                               onChange={e => setUser({...user, patronymic: e.target.value})}
-                               defaultValue={user.patronymic}
-                               className={input_style}
-                        />
-                    </label>
-                    <label className="block">
-                        <span className="block text-sm font-medium text-slate-700 text-center mt-2">Staff</span>
-                        <input type="checkbox"
-                               defaultChecked={user.is_staff}
-                               className={input_style}
-                               disabled
-                        />
-                    </label>
-                    <label className="block">
-                        <span className="block text-sm font-medium text-slate-700 text-center mt-2">Teacher</span>
-                        <input type="checkbox"
-                               defaultChecked={user.is_teacher}
-                               className={input_style}
-                               disabled
-                        />
-                    </label>
+                    <div className="flex items-center justify-center w-full my-2">
+                        <label htmlFor="dropzone-file"
+                               className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg aria-hidden="true" className="w-10 h-10 mb-3 text-gray-400" fill="none"
+                                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                </svg>
+                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                    className="font-semibold">Click to upload avatar</span> or drag and drop</p>
+                            </div>
+                            <input id="dropzone-file"
+                                   type="file"
+                                   className="hidden"
+                                   onChange={(event) => setImage(event.target.files[0])}
+                            />
+                        </label>
+                    </div>
+                    <div className="grid gap-6 mb-4 md:grid-cols-2">
+                        <div>
+                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Email
+                            </label>
+                            <input
+                                className={input_style} type="text"
+                                onChange={e => setUser({...user, email: e.target.value})}
+                                defaultValue={user.email}
+                            />
+                        </div>
+                        <div>
+                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                First Name
+                            </label>
+                            <input type="text"
+                                   className={input_style}
+                                   onChange={e => setUser({...user, first_name: e.target.value})}
+                                   defaultValue={user.first_name}
+                            />
+                        </div>
+                        <div>
+                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Last Name
+                            </label>
+                            <input type="text" i
+                                   className={input_style}
+                                   onChange={e => setUser({...user, last_name: e.target.value})}
+                                   defaultValue={user.last_name}
+                            />
+                        </div>
+                        <div>
+                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Patronymic
+                            </label>
+                            <input type="text"
+                                   className={input_style}
+                                   onChange={e => setUser({...user, patronymic: e.target.value})}
+                                   defaultValue={user.patronymic}
+                            />
+                        </div>
+                        <div className="text-center">
+                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Superuser
+                            </label>
+                            <input
+                                className={input_style} type="checkbox"
+                                defaultChecked={user.is_staff}
+                                disabled
+                            />
+                        </div>
+                        <div className="text-center">
+                            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teacher
+                            </label>
+                            <input
+                                className={input_style} type="checkbox"
+                                defaultChecked={user.is_teacher}
+                                disabled
+                            />
+                        </div>
+                    </div>
                 </form>
-                <div className="flex justify-between mt-2">
-                    <MyButton
-                        onClick={(e) => updateImage(e)}
-                    >
-                        Update image
-                    </MyButton>
-
-                    <MyButton
-                        onClick={(e) => update(e)}
-                    >
-                        Update info
-                    </MyButton>
-
-                    <MyButton
-                        onClick={(e) => logout(e)}
-                    >
-                        Logout
-                    </MyButton>
-                </div>
             </div>
             <div className="w-1/5">
                 <button
                     className="block w-5/6 mx-auto h-14 mb-2 border border-teal-500"
+                    onClick={(e) => update(e)}
                 >
-                    Создать курс
+                    Update info
+                </button>
+                <button
+                    className="block w-5/6 mx-auto h-14 mb-2 border border-teal-500"
+                    onClick={(e) => updateImage(e)}
+                >
+                    Update image
                 </button>
                 <Link to='/teacher/courses'>
                     <button
@@ -152,6 +158,12 @@ const Profile = () => {
                         Мои курсы
                     </button>
                 </Link>
+                <button
+                    className="block w-5/6 mx-auto h-14 mb-2 border border-teal-500"
+                    onClick={(e) => logout(e)}
+                >
+                    Logout
+                </button>
             </div>
         </div>
     );

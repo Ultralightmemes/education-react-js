@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useFetching} from "../hooks/useFetching";
 import CourseService from "../services/CourseService";
 import CourseTeacherCard from "../components/CourseTeacherCard";
+import {Link} from "react-router-dom";
 
 const TeacherCourses = () => {
     const [courses, setCourses] = useState([])
@@ -18,9 +19,9 @@ const TeacherCourses = () => {
     return (
         <div className="w-full flex justify-center text-center items-center mb-2">
             <div className="w-4/6">
-                <div className="w-full shadow-lg flex flex-row h-20 justify-center items-center -mt-5">
+                <Link to="/teacher/course/create" className="w-full shadow-lg flex flex-row h-20 justify-center items-center -mt-5">
                     <h1 className="text-xl">Добавить курс</h1>
-                </div>
+                </Link>
                 {courses.map(course => <CourseTeacherCard course={course}/>)}
             </div>
         </div>
