@@ -24,4 +24,22 @@ export default class CourseService {
     static async getTeacherCourses() {
         return $api.get('teacher/course/')
     }
+
+    static async createCourse(name, text, is_published, categories, image) {
+        return $api.post('teacher/course/', {
+            name,
+            text,
+            is_published,
+            categories,
+        }).then(response => {
+            if (response.status === 201) {
+                const patchResponse = $api.patch(`teacher/course/${response.data.id}/image/`, {image}, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                })
+            }
+
+        })
+    }
 }

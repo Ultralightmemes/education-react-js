@@ -1,9 +1,9 @@
 import axios from "axios";
 
-// export const API_URL = 'http://localhost:8000/'
+export const API_URL = 'http://localhost:8000/'
 // export const API_URL = 'https://education-django.herokuapp.com/'
 // export const API_URL = 'http://5-180-182-221.cloud-xip.com/'
-export const API_URL = 'https://5-180-182-221.cloud-xip.com/'
+// export const API_URL = 'https://5-180-182-221.cloud-xip.com/'
 
 
 
