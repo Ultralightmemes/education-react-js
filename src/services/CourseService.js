@@ -25,21 +25,29 @@ export default class CourseService {
         return $api.get('teacher/course/')
     }
 
-    static async createCourse(name, text, is_published, categories, image) {
+    static async updateCourseImage(id, image) {
+        return $api.patch(`teacher/course/${id}/image/`, {image}, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
+    }
+
+    static async updateCourse(course) {
+        return $api.patch(`teacher/course/${course.id}/`, {
+            categories: course.categories,
+            name: course.name,
+            is_published: course.is_published,
+            text: course.text
+        })
+    }
+
+    static async createCourse(name, text, is_published, categories) {
         return $api.post('teacher/course/', {
             name,
             text,
             is_published,
             categories,
-        }).then(response => {
-            if (response.status === 201) {
-                const patchResponse = $api.patch(`teacher/course/${response.data.id}/image/`, {image}, {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                })
-            }
-
         })
     }
 }

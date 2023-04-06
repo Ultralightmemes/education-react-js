@@ -1,45 +1,63 @@
 import React, {useEffect, useState} from 'react';
 import {useFetching} from "../hooks/useFetching";
 import CategoryService from "../services/CategoryService";
+import {useParams} from "react-router-dom";
 import CourseService from "../services/CourseService";
 
-const CreateCourse = () => {
+const UpdateCourse = () => {
+    const {id} = useParams()
     const [categories, setCategories] = useState([])
-    const [name, setName] = useState('')
-    const [text, setText] = useState('')
-    const [image, setImage] = useState('')
-    const [isPublished, setIsPublished] = useState(false)
-    const [chosenCategories, setChosenCategories] = useState([])
-
-    const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(async () => {
-        const response = await CategoryService.getCategories()
-        setCategories(response.data)
+    const [course, setCourse] = useState({
+        id: null,
+        categories: [{
+            id: null,
+            name: '',
+        }],
+        name: '',
+        is_published: true,
+        text: '',
+        image: '',
     })
+    const [image, setImage] = useState(null)
+
+    const [fetchCourse, isCourseLoading, courseError] = useFetching(async () => {
+        await CourseService.getById(id)
+            .then(async response => {
+                setCourse(response.data)
+                const categoryResponse = await CategoryService.getCategories()
+                let categoryIds = []
+                for (let i = 0; i < response.data.categories.length; i++) {
+                    categoryIds.push(response.data.categories[i].id)
+                }
+                setCategories(categoryResponse.data.filter(item => !categoryIds.includes(item.id)))
+            })
+    })
+
+    useEffect(() => {
+        fetchCourse()
+    }, [])
 
     const moveToChosen = (e, category) => {
         e.preventDefault()
-        setChosenCategories([...chosenCategories, category])
+        setCourse({...course, categories: [...course.categories, category]})
         setCategories(categories.filter(item => item !== category))
     }
 
     const moveToInitial = (e, category) => {
         e.preventDefault()
         setCategories([...categories, category])
-        setChosenCategories(chosenCategories.filter(item => item !== category))
+        setCourse({...course, categories: course.categories.filter(item => item !== category)})
     }
 
-    const createCourse = (e) => {
+    const updateCourse = (e) => {
         e.preventDefault()
-        const response = CourseService.createCourse(name, text, isPublished, chosenCategories).then(response => {
-            if (response.status === 201) {
-                const patchResponse = CourseService.updateCourseImage(response.data.id, image)
+        CourseService.updateCourse(course).then(response => {
+            if (response.status === 200) {
+                const patchResponse = CourseService.updateCourseImage(id, image)
             }
         })
-    }
 
-    useEffect(() => {
-        fetchCategories()
-    }, [])
+    }
 
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
         "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " +
@@ -49,7 +67,7 @@ const CreateCourse = () => {
         <div className="flex justify-center items-center">
 
             <form className="w-2/3 text-center">
-                <h1 className="mx-auto text-4xl mb-7">Создание курса</h1>
+                <h1 className="mx-auto text-4xl mb-7">{course.name}</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">
                     <div>
                         <div>
@@ -58,7 +76,8 @@ const CreateCourse = () => {
                             </label>
                             <input
                                 className={input_style} type="text"
-                                onChange={e => setName(e.target.value)}
+                                defaultValue={course.name}
+                                onChange={e => setCourse({...course, name: e.target.value})}
                             />
                         </div>
                         <div className="mt-6">
@@ -67,7 +86,8 @@ const CreateCourse = () => {
                                 <input
                                     className={input_style}
                                     type="checkbox"
-                                    onChange={e => setIsPublished(e.target.checked)}
+                                    defaultChecked={course.is_published}
+                                    onChange={e => setCourse({...course, is_published: e.target.checked})}
                                 />
                             </label>
                         </div>
@@ -75,9 +95,7 @@ const CreateCourse = () => {
                     <div className="flex items-center justify-center w-full my-2">
                         <label htmlFor="dropzone-file"
                                className="flex flex-col items-center justify-center w-full h-32 border-2
-                               border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50
-                               dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600
-                               dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                               border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
                             <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                 <svg aria-hidden="true" className="w-10 h-10 mb-3 text-gray-400" fill="none"
                                      stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +109,7 @@ const CreateCourse = () => {
                             <input id="dropzone-file"
                                    type="file"
                                    className="hidden"
-                                   onChange={(event) => setImage(event.target.files[0])}
+                                   onChange={(e) => setImage(e.target.files[0])}
                             />
                         </label>
                     </div>
@@ -102,7 +120,8 @@ const CreateCourse = () => {
                     </label>
                     <textarea
                         className={input_style}
-                        onChange={e => setText(e.target.value)}
+                        defaultValue={course.text}
+                        onChange={e => setCourse({...course, text: e.target.value})}
                     />
                 </div>
                 <div className="flex text-center mt-2">
@@ -115,19 +134,22 @@ const CreateCourse = () => {
                         <button
                             className="mt-7 bg-blue-500 hover:bg-blue-700 text-2xl text-white font-bold py-2 px-4
                             rounded"
-                            onClick={e => createCourse(e)}>
-                            Создать
+                            onClick={e => updateCourse(e)}
+                        >
+                            Изменить
                         </button>
                     </div>
                     <div className="flex w-1/3 mt-4 border border-black">
                         <div className="w-1/2 flex flex-col">
                             {categories.map(category => <button
+                                key={category.id}
                                 className="rounded-r-2xl border"
                                 onClick={e => moveToChosen(e, category)}
                             >{category.name}</button>)}
                         </div>
                         <div className="w-1/2 flex flex-col">
-                            {chosenCategories.map(category => <button
+                            {course.categories.map(category => <button
+                                key={category.id}
                                 className="rounded-l-2xl border"
                                 onClick={e => moveToInitial(e, category)}
                             >{category.name}</button>)}
@@ -139,4 +161,4 @@ const CreateCourse = () => {
     );
 };
 
-export default CreateCourse;
+export default UpdateCourse;

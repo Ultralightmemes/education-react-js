@@ -1,5 +1,6 @@
 import React from 'react';
 import {API_URL} from "../http";
+import {Link} from "react-router-dom";
 
 const CourseTeacherCard = ({course}) => {
     const handleImageError = (event) => {
@@ -8,7 +9,7 @@ const CourseTeacherCard = ({course}) => {
 
     console.log(course)
     return (
-        <div className="w-full shadow-lg flex flex-row h-48">
+        <Link to={`/teacher/course/${course.id}`} className="w-full shadow-lg flex flex-row h-48">
             <img className="h-44 w-44 mx-auto ml-1 my-2"
                  src={API_URL.substring(0, API_URL.length - 1) + course.image}
                  alt="CourseCard"
@@ -32,7 +33,7 @@ const CourseTeacherCard = ({course}) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
