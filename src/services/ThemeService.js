@@ -8,4 +8,8 @@ export default class ThemeService {
     static async getCourseThemesForTeacher(id) {
         return $api.get(`teacher/course/${id}/theme/`)
     }
+
+    static async createTheme(id, theme) {
+        return $api.post(`teacher/course/${id}/theme/`, theme)
+    }
 }
