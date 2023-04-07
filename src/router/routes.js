@@ -21,7 +21,8 @@ export const privateRoutes = [
     {path: '/profile/courses', element: <UserCourses/>},
     {path: '/course/:id/lesson', element: <Lesson/>},
     {path: '/course/:id/lesson/:lesson_id', element: <Lesson/>},
-    {path: 'teacher/courses', element: <TeacherCourses/>},
-    {path: 'teacher/course/create', element: <CreateCourse/>},
-    {path: 'teacher/course/:id', element: <UpdateCourse/>},
+    {path: '/teacher/courses', element: <TeacherCourses/>},
+    {path: '/teacher/course/create', element: <CreateCourse/>},
+    {path: '/teacher/course/:id', element: <UpdateCourse/>},
+    // {path: 'teacher/theme/:id', element: },
 ]

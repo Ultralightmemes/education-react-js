@@ -3,6 +3,7 @@ import {useFetching} from "../hooks/useFetching";
 import CategoryService from "../services/CategoryService";
 import {useParams} from "react-router-dom";
 import CourseService from "../services/CourseService";
+import CourseTheme from "../components/CourseTheme";
 
 const UpdateCourse = () => {
     const {id} = useParams()
@@ -124,11 +125,6 @@ const UpdateCourse = () => {
                         onChange={e => setCourse({...course, text: e.target.value})}
                     />
                 </div>
-                <div className="flex text-center mt-2">
-                    <h2 className="text-2xl mx-auto">
-                        Категории
-                    </h2>
-                </div>
                 <div className="flex">
                     <div className="w-1/3">
                         <button
@@ -139,20 +135,33 @@ const UpdateCourse = () => {
                             Изменить
                         </button>
                     </div>
-                    <div className="flex w-1/3 mt-4 border border-black">
-                        <div className="w-1/2 flex flex-col">
-                            {categories.map(category => <button
-                                key={category.id}
-                                className="rounded-r-2xl border"
-                                onClick={e => moveToChosen(e, category)}
-                            >{category.name}</button>)}
+                    <div className="flex w-1/3 mt-4 flex-col">
+                        <h2 className="text-2xl mx-auto block">
+                            Темы
+                        </h2>
+                        <div className="w-full">
+                            <CourseTheme id={id}/>
                         </div>
-                        <div className="w-1/2 flex flex-col">
-                            {course.categories.map(category => <button
-                                key={category.id}
-                                className="rounded-l-2xl border"
-                                onClick={e => moveToInitial(e, category)}
-                            >{category.name}</button>)}
+                    </div>
+                    <div className="flex w-1/3 mt-4 flex-col">
+                        <h2 className="text-2xl mx-auto block">
+                            Категории
+                        </h2>
+                        <div className="flex w--full mt-4 border border-black">
+                            <div className="w-1/2 flex flex-col">
+                                {categories.map(category => <button
+                                    key={category.id}
+                                    className="rounded-r-2xl border"
+                                    onClick={e => moveToChosen(e, category)}
+                                >{category.name}</button>)}
+                            </div>
+                            <div className="w-1/2 flex flex-col">
+                                {course.categories.map(category => <button
+                                    key={category.id}
+                                    className="rounded-l-2xl border"
+                                    onClick={e => moveToInitial(e, category)}
+                                >{category.name}</button>)}
+                            </div>
                         </div>
                     </div>
                 </div>
