@@ -11,7 +11,7 @@ const CourseCard = ({course}) => {
             <Link to={'/preview/' + course.id}>
                 <div className="rounded overflow-hidden shadow-lg h-72 w-80 mb-3">
                     <img className="h-44 w-44 mx-auto mt-2"
-                         src={course.image}
+                         src={course.image ? course.image : '/No_image_available.svg.png'}
                          alt="CourseCard"
                          id={course.id}
                          onError={handleImageError}

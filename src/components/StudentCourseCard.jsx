@@ -20,7 +20,7 @@ const StudentCourseCard = ({course}) => {
             <Link to={'/course/' + course.id + '/lesson'} onClick={() => store.delLesson()}>
                 <div>
                     <img className="h-44 w-44 mx-auto mt-2"
-                         src={course.image}
+                         src={course.image ? course.image : '/No_image_available.svg.png'}
                          alt="CourseCard"
                          id={course.id}
                          onError={handleImageError}
