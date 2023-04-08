@@ -16,4 +16,22 @@ export default class LessonService {
             }
         })
     }
+
+    static async getThemeLessons(id) {
+        return $api.get(`teacher/theme/${id}/lesson/`)
+    }
+
+    static async getTeacherLesson(id) {
+        return $api.get(`teacher/lesson/${id}/`)
+    }
+
+
+
+    static async updateLesson(lesson) {
+        return $api.patch(`teacher/lesson/${lesson.id}/`, lesson,{
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
+    }
 }
