@@ -10,6 +10,7 @@ import CreateCourse from "../pages/Teacher/CreateCourse";
 import UpdateCourse from "../pages/Teacher/UpdateCourse";
 import CreateTheme from "../pages/Teacher/CreateTheme";
 import UpdateTheme from "../pages/Teacher/UpdateTheme";
+import CreateLesson from "../pages/Teacher/CreateLesson";
 
 export const publicRoutes = [
     {path: '/courses', element: <CourseListPage/>},
@@ -28,4 +29,5 @@ export const privateRoutes = [
     {path: '/teacher/course/:id', element: <UpdateCourse/>},
     {path: 'teacher/theme/create/:id', element: <CreateTheme/>},
     {path: 'teacher/theme/:id', element: <UpdateTheme/>},
+    {path: 'teacher/lesson/create/:id', element: <CreateLesson/>},
 ]

@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import {useParams} from "react-router-dom";
 import ThemeService from "../../services/ThemeService";
-import LessonService from "../../services/LessonService";
-import CourseTheme from "../../components/CourseTheme";
 import ThemeLesson from "../../components/ThemeLesson";
 
 const UpdateTheme = () => {
