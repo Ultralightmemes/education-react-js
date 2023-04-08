@@ -8,6 +8,7 @@ import LessonService from "../services/LessonService";
 const Tasks = ({id}) => {
     const [tests, setTests] = useState([])
     const [exercises, setExercises] = useState([])
+    console.log(id)
 
     const [fetchTests, isTestsLoading, testsError] = useFetching(async () => {
         const response = await TaskService.getTests(id)

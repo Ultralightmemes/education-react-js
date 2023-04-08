@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
 import LessonService from "../../services/LessonService";
+import LessonTask from "../../components/LessonTask";
 
 const UpdateLesson = () => {
     const {id} = useParams()
@@ -16,7 +17,6 @@ const UpdateLesson = () => {
     const [fetchLesson, isLessonLoading, LessonError] = useFetching(async () => {
         const response = await LessonService.getTeacherLesson(id)
         setLesson(response.data)
-        console.log(response.data)
     })
 
     useEffect(() => {
@@ -122,14 +122,16 @@ const UpdateLesson = () => {
                             </button>
                         </div>
                     </div>
-                    {/*<div className="flex w-1/3 mt-4 flex-col">*/}
-                    {/*    <h2 className="text-2xl mx-auto block">*/}
-                    {/*        Уроки*/}
-                    {/*    </h2>*/}
-                    {/*    <div className="w-full">*/}
-                    {/*        <ThemeLesson id={id}/>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    <div className="flex w-1/3 mt-4 flex-col">
+                        <div className="w-11/12 mx-auto border-2 border-gray-500 rounded-xl pb-2">
+                            <h2 className="text-2xl mx-auto block">
+                                Задания
+                            </h2>
+                            <div className="w-full">
+                                <LessonTask id={id}/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
