@@ -15,7 +15,6 @@ const UpdateCourse = () => {
             name: '',
         }],
         name: '',
-        is_published: true,
         text: '',
         image: '',
     })
@@ -88,7 +87,7 @@ const UpdateCourse = () => {
                                     className={input_style}
                                     type="checkbox"
                                     defaultChecked={course.is_published}
-                                    onChange={e => setCourse({...course, is_published: e.target.checked})}
+                                    onInput={e => setCourse({...course, is_published: !course.is_published})}
                                 />
                             </label>
                         </div>
