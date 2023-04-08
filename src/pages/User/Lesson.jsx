@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import LessonService from "../../services/LessonService";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import SideThemes from "../../components/SideThemes";
 import ReactPlayer from "react-player";
 import {API_URL} from "../../http";
@@ -11,6 +11,7 @@ import {observer} from "mobx-react-lite";
 import Tasks from "../../components/Tasks";
 
 const Lesson = observer(() => {
+    const navigate = useNavigate()
     const {id} = useParams()
     const [lesson, setLesson] = useState(
         {
@@ -36,6 +37,9 @@ const Lesson = observer(() => {
 
     const [fetchLesson, isLessonLoading, lessonError] = useFetching(async () => {
         const response = await LessonService.getLesson(id, store.lesson)
+        if (response.data.count === 0) {
+            navigate('/profile/courses')
+        }
         setLesson(response.data)
         setPreviousURL(response.data.previous)
         setNextURL(response.data.next)
@@ -44,7 +48,6 @@ const Lesson = observer(() => {
 
     useEffect(() => {
         fetchLesson()
-
         return () => {
             store.delTitle()
         };
