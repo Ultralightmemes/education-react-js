@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
 import LessonService from "../../services/LessonService";
-import ThemeLesson from "../../components/ThemeLesson";
 
 const UpdateLesson = () => {
     const {id} = useParams()
+    const navigate = useNavigate()
     const [lesson, setLesson] = useState({
         title: '',
         video: null,
@@ -25,11 +25,18 @@ const UpdateLesson = () => {
 
     const updateLesson = (e) => {
         e.preventDefault()
-        console.log(lesson.video)
         if (typeof lesson.video === "string") {
             lesson.video = null
         }
         LessonService.updateLesson(lesson)
+    }
+
+    const deleteLesson = (e) => {
+        e.preventDefault()
+        LessonService.deleteLesson(id).then(response => {
+            navigate(`/teacher/theme/${lesson.theme}`)
+        })
+
     }
 
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
@@ -39,7 +46,7 @@ const UpdateLesson = () => {
     return (
         <div className="flex justify-center items-center">
             <form className="w-2/3 text-center">
-                <h1 className="mx-auto text-4xl mb-7">{lesson.title}</h1>
+                <h1 className="mx-auto text-4xl mb-7">Урок: {lesson.title}</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">
                     <div>
                         <div>
@@ -98,13 +105,22 @@ const UpdateLesson = () => {
                 </div>
                 <div className="flex">
                     <div className="w-1/3">
-                        <button
-                            className="mt-7 bg-blue-500 hover:bg-blue-700 text-2xl text-white font-bold py-2 px-4
-                            rounded"
-                            onClick={e => updateLesson(e)}
-                        >
-                            Изменить
-                        </button>
+                        <div className="flex flex-col w-5/12 mx-auto">
+                            <button
+                                className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-2 border
+                            border-gray-400 rounded shadow text-xl mt-4"
+                                onClick={e => updateLesson(e)}
+                            >
+                                Изменить
+                            </button>
+                            <button
+                                className="bg-white hover:bg-red-400 text-gray-800 font-semibold py-2 px-2 border
+                            border-red-400 rounded shadow text-xl mt-4"
+                                onClick={e => deleteLesson(e)}
+                            >
+                                Удалить
+                            </button>
+                        </div>
                     </div>
                     {/*<div className="flex w-1/3 mt-4 flex-col">*/}
                     {/*    <h2 className="text-2xl mx-auto block">*/}

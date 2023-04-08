@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ThemeService from "../../services/ThemeService";
 
 const CreateTheme = () => {
+    const navigate = useNavigate()
     const {id} = useParams()
     const [theme, setTheme] = useState({
         title: '',
@@ -12,9 +13,11 @@ const CreateTheme = () => {
         num_lessons: null
     })
 
-    const createTheme = (e) => {
+    const createTheme = async (e) => {
         e.preventDefault()
-        const response = ThemeService.createTheme(id, theme)
+        await ThemeService.createTheme(id, theme).then(response => {
+            navigate(`/teacher/theme/${response.data.id}`)
+        })
     }
 
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
@@ -24,7 +27,7 @@ const CreateTheme = () => {
     return (
         <div className="flex justify-center items-center">
             <form className="w-2/3 text-center">
-                <h1 className="mx-auto text-4xl mb-7">Создание курса</h1>
+                <h1 className="mx-auto text-4xl mb-7">Создание темы</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">
                     <div>
                         <div>
@@ -60,11 +63,11 @@ const CreateTheme = () => {
                 <div className="flex">
                     <div className="w-1/3">
                         <button
-                            className="mt-7 bg-blue-500 hover:bg-blue-700 text-2xl text-white font-bold py-2 px-4
-                            rounded"
+                            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-2 border
+                            border-gray-400 rounded shadow text-xl mt-4 w-5/12"
                             onClick={e => createTheme(e)}
                             >
-                            Создать
+                            Сохранить
                         </button>
                     </div>
                 </div>

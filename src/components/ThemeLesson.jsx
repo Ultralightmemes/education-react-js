@@ -18,15 +18,17 @@ const ThemeLesson = ({id}) => {
     return (
         <div className="w-full flex flex-col">
             <Link
-                className="border w-full"
+                className="border w-full text-l py-1 hover:bg-green-100"
                 to={`/teacher/lesson/create/${id}`}>
                 Добавить
             </Link>
-            {lessons.map(lesson => <Link
-                className="border w-full"
-                to={`/teacher/lesson/${lesson.id}/`}>
-                {lesson.title}
-            </Link>)}
+            {lessons.map(lesson => <div className="w-full flex">
+                <Link
+                    className="border w-full text-l py-1 hover:bg-gray-100"
+                    to={`/teacher/lesson/${lesson.id}`}>
+                    {lesson.title}
+                </Link>
+            </div>)}
         </div>
     );
 };

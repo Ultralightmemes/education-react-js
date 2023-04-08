@@ -26,4 +26,8 @@ export default class ThemeService {
             is_published: theme.is_published
         })
     }
+
+    static async deleteTheme(id) {
+        return $api.delete(`teacher/theme/${id}/`)
+    }
 }

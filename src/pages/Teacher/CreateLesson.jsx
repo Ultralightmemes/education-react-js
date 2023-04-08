@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import LessonService from "../../services/LessonService";
 
 const CreateLesson = () => {
+    const navigate = useNavigate()
     const {id} = useParams()
     const [lesson, setLesson] = useState({
         title: '',
@@ -16,9 +17,11 @@ const CreateLesson = () => {
         "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " +
         "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
-    const createLesson = (e) => {
+    const createLesson = async (e) => {
         e.preventDefault()
-        LessonService.createLesson(id, lesson)
+        await LessonService.createLesson(id, lesson).then(response => {
+            navigate(`/teacher/lesson/${response.data.id}`)
+        })
     }
 
     return (
@@ -82,8 +85,8 @@ const CreateLesson = () => {
                 <div className="flex">
                     <div className="w-1/3">
                         <button
-                            className="mt-7 bg-blue-500 hover:bg-blue-700 text-2xl text-white font-bold py-2 px-4
-                            rounded"
+                            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-2 border
+                            border-gray-400 rounded shadow text-xl mt-4 w-5/12"
                             onClick={e => createLesson(e)}
                         >
                             Сохранить

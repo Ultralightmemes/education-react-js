@@ -50,4 +50,8 @@ export default class CourseService {
             categories,
         })
     }
+
+    static async deleteCourse(id) {
+        return $api.delete(`teacher/course/${id}/`)
+    }
 }

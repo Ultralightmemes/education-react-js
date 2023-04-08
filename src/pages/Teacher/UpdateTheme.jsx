@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import ThemeService from "../../services/ThemeService";
 import ThemeLesson from "../../components/ThemeLesson";
 
 const UpdateTheme = () => {
+    const navigate = useNavigate()
     const {id} = useParams()
     const [theme, setTheme] = useState({})
 
@@ -20,8 +21,15 @@ const UpdateTheme = () => {
     const updateTheme = (e) => {
         e.preventDefault()
         const response = ThemeService.updateTheme(theme)
-        console.log(theme)
     }
+
+    const deleteTheme = async (e) => {
+        e.preventDefault()
+        await ThemeService.deleteTheme(id)
+        navigate(`/teacher/course/${theme.course_id}`)
+    }
+
+    console.log(theme)
 
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
         "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " +
@@ -30,7 +38,7 @@ const UpdateTheme = () => {
     return (
         <div className="flex justify-center items-center">
             <form className="w-2/3 text-center">
-                <h1 className="mx-auto text-4xl mb-7">{theme.title}</h1>
+                <h1 className="mx-auto text-4xl mb-7">Тема: {theme.title}</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">
                     <div>
                         <div>
@@ -68,20 +76,31 @@ const UpdateTheme = () => {
                 </div>
                 <div className="flex">
                     <div className="w-1/3">
-                        <button
-                            className="mt-7 bg-blue-500 hover:bg-blue-700 text-2xl text-white font-bold py-2 px-4
-                            rounded"
-                            onClick={e => updateTheme(e)}
-                        >
-                            Изменить
-                        </button>
+                        <div className="flex flex-col w-5/12 mx-auto">
+                            <button
+                                className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-2 border
+                            border-gray-400 rounded shadow text-xl mt-4"
+                                onClick={e => updateTheme(e)}
+                            >
+                                Изменить
+                            </button>
+                            <button
+                                className="bg-white hover:bg-red-400 text-gray-800 font-semibold py-2 px-2 border
+                            border-red-400 rounded shadow text-xl mt-4"
+                                onClick={e => deleteTheme(e)}
+                            >
+                                Удалить
+                            </button>
+                        </div>
                     </div>
                     <div className="flex w-1/3 mt-4 flex-col">
-                        <h2 className="text-2xl mx-auto block">
-                            Уроки
-                        </h2>
-                        <div className="w-full">
-                            <ThemeLesson id={id}/>
+                        <div className="w-11/12 mx-auto border-2 border-gray-500 rounded-xl pb-2">
+                            <h2 className="text-2xl mx-auto block">
+                                Уроки
+                            </h2>
+                            <div className="w-full">
+                                <ThemeLesson id={id}/>
+                            </div>
                         </div>
                     </div>
                 </div>

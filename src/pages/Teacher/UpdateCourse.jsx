@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import CategoryService from "../../services/CategoryService";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import CourseService from "../../services/CourseService";
 import CourseTheme from "../../components/CourseTheme";
 
 const UpdateCourse = () => {
+    const navigate = useNavigate()
     const {id} = useParams()
     const [categories, setCategories] = useState([])
     const [course, setCourse] = useState({
@@ -56,7 +57,12 @@ const UpdateCourse = () => {
                 const patchResponse = CourseService.updateCourseImage(id, image)
             }
         })
+    }
 
+    const deleteCourse = async (e) => {
+        e.preventDefault()
+        await CourseService.deleteCourse(id)
+        navigate('/teacher/courses')
     }
 
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
@@ -67,7 +73,7 @@ const UpdateCourse = () => {
         <div className="flex justify-center items-center">
 
             <form className="w-2/3 text-center">
-                <h1 className="mx-auto text-4xl mb-7">{course.name}</h1>
+                <h1 className="mx-auto text-4xl mb-7">Курс: {course.name}</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">
                     <div>
                         <div>
@@ -126,38 +132,51 @@ const UpdateCourse = () => {
                 </div>
                 <div className="flex">
                     <div className="w-1/3">
+                        <div className="flex flex-col w-5/12 mx-auto">
                         <button
-                            className="mt-7 bg-blue-500 hover:bg-blue-700 text-2xl text-white font-bold py-2 px-4
-                            rounded"
+                            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-2 border
+                            border-gray-400 rounded shadow text-xl mt-4"
                             onClick={e => updateCourse(e)}
                         >
-                            Изменить
+                            Сохранить
                         </button>
-                    </div>
-                    <div className="flex w-1/3 mt-4 flex-col">
-                        <h2 className="text-2xl mx-auto block">
-                            Темы
-                        </h2>
-                        <div className="w-full">
-                            <CourseTheme id={id}/>
+                        <button
+                            className="bg-white hover:bg-red-400 text-gray-800 font-semibold py-2 px-2 border
+                            border-red-400 rounded shadow text-xl mt-4"
+                            onClick={e => deleteCourse(e)}
+                        >
+                            Удалить
+                        </button>
                         </div>
                     </div>
                     <div className="flex w-1/3 mt-4 flex-col">
-                        <h2 className="text-2xl mx-auto block">
+                        <div className="w-11/12 mx-auto border-2 border-gray-500 rounded-xl pb-2">
+                            <h2 className="text-2xl mx-auto block">
+                                Темы
+                            </h2>
+                            <div className="w-full">
+                                <CourseTheme id={id}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex w-1/3 mt-4 flex-col border-2 border-gray-500 rounded-xl pb-2">
+                        <h2 className="text-2xl mx-auto block w-full border-b">
                             Категории
                         </h2>
-                        <div className="flex w--full mt-4 border border-black">
-                            <div className="w-1/2 flex flex-col">
+                        <div className="flex w-full mx-1">
+                            <div className="w-1/2 flex flex-col border-r-2">
+                                <h3 className="border-b mb-1">Доступные</h3>
                                 {categories.map(category => <button
                                     key={category.id}
-                                    className="rounded-r-2xl border"
+                                    className="rounded-r-2xl shadow-inner shadow-red-200 shadow-sm"
                                     onClick={e => moveToChosen(e, category)}
                                 >{category.name}</button>)}
                             </div>
                             <div className="w-1/2 flex flex-col">
+                                <h3 className="border-b mb-1">Выбранные</h3>
                                 {course.categories.map(category => <button
                                     key={category.id}
-                                    className="rounded-l-2xl border"
+                                    className="rounded-l-2xl shadow-inner shadow-green-200 shadow-sm"
                                     onClick={e => moveToInitial(e, category)}
                                 >{category.name}</button>)}
                             </div>

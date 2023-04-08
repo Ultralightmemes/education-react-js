@@ -19,15 +19,15 @@ const CourseTheme = ({id}) => {
     return (
         <div className="w-full flex flex-col">
             <Link
-                className="border w-full"
+                className="border w-full text-l py-1 hover:bg-green-100"
                 to={`/teacher/theme/create/${id}`}>
                 Добавить
             </Link>
             {themes.map(theme => <div className="w-full flex">
                     <Link
-                        className="border w-full"
+                        className="border w-full text-l py-1 hover:bg-gray-100"
                         to={`/teacher/theme/${theme.id}/`}>
-                        {theme.position}
+                        {theme.title}
                     </Link>
                     {/*<button className="w-1/6 block">f</button>*/}
                     {/*<button className="w-1/6 block">f</button>*/}

@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import CategoryService from "../../services/CategoryService";
 import CourseService from "../../services/CourseService";
-import CourseTheme from "../../components/CourseTheme";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const CreateCourse = () => {
+    const navigate = useNavigate()
     const [categories, setCategories] = useState([])
     const [name, setName] = useState('')
     const [text, setText] = useState('')
@@ -30,11 +30,13 @@ const CreateCourse = () => {
         setChosenCategories(chosenCategories.filter(item => item !== category))
     }
 
-    const createCourse = (e) => {
+    const createCourse = async (e) => {
         e.preventDefault()
-        const response = CourseService.createCourse(name, text, isPublished, chosenCategories).then(response => {
+        const response = await CourseService.createCourse(name, text, isPublished, chosenCategories).then(response => {
             if (response.status === 201) {
                 const patchResponse = CourseService.updateCourseImage(response.data.id, image)
+                console.log(response.data)
+                navigate(`/teacher/course/${response.data.id}`)
             }
         })
     }
@@ -110,26 +112,28 @@ const CreateCourse = () => {
                 <div className="flex">
                     <div className="w-1/3">
                         <button
-                            className="mt-7 bg-blue-500 hover:bg-blue-700 text-2xl text-white font-bold py-2 px-4
-                            rounded"
+                            className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-2 border
+                            border-gray-400 rounded shadow text-xl mt-4 w-5/12"
                             onClick={e => createCourse(e)}>
-                            Создать
+                            Сохранить
                         </button>
                     </div>
-                    <div className="flex w-1/3 mt-4 flex-col">
-                        <h2 className="text-2xl mx-auto block">
+                    <div className="flex w-1/3 mt-4 flex-col border-2 border-gray-500 rounded-xl pb-2">
+                        <h2 className="text-2xl mx-auto block w-full border-b">
                             Категории
                         </h2>
-                        <div className="flex w-full mt-4 border border-black">
-                            <div className="w-1/2 flex flex-col">
+                        <div className="flex w-full">
+                            <div className="w-1/2 flex flex-col border-r-2">
+                                <h3 className="border-b mb-1">Доступные</h3>
                                 {categories.map(category => <button
-                                    className="rounded-r-2xl border"
+                                    className="rounded-r-2xl shadow-inner shadow-red-200 shadow-sm"
                                     onClick={e => moveToChosen(e, category)}
                                 >{category.name}</button>)}
                             </div>
                             <div className="w-1/2 flex flex-col">
+                                <h3 className="border-b mb-1">Выбранные</h3>
                                 {chosenCategories.map(category => <button
-                                    className="rounded-l-2xl border"
+                                    className="rounded-l-2xl shadow-inner shadow-green-200 shadow-sm"
                                     onClick={e => moveToInitial(e, category)}
                                 >{category.name}</button>)}
                             </div>

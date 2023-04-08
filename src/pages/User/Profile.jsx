@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react';
-import MyButton from "../../components/UI/button/MyButton";
 import {Context} from "../../index";
 import {useFetching} from "../../hooks/useFetching";
 import UserService from "../../services/UserService";
@@ -47,8 +46,12 @@ const Profile = () => {
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
         "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " +
         "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+
+    const button_style = "block w-5/6 mx-auto h-14 mb-2 border border-gray-500 rounded-l"
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex">
+            <div className="w-1/5">
+            </div>
             <div className="w-2/5">
                 {
                     user.image
@@ -138,31 +141,31 @@ const Profile = () => {
                     </div>
                 </form>
             </div>
-            <div className="w-1/5">
+            <div className="w-1/5 h-full">
                 <button
-                    className="block w-5/6 mx-auto h-14 mb-2 border border-teal-500"
+                    className={button_style}
                     onClick={(e) => update(e)}
                 >
-                    Update info
+                    Обновить информацию
                 </button>
                 <button
-                    className="block w-5/6 mx-auto h-14 mb-2 border border-teal-500"
+                    className={button_style}
                     onClick={(e) => updateImage(e)}
                 >
-                    Update image
+                    Обновить изображение
                 </button>
                 <Link to='/teacher/courses'>
                     <button
-                        className="block w-5/6 mx-auto h-14 border border-teal-500"
+                        className={button_style}
                     >
                         Мои курсы
                     </button>
                 </Link>
                 <button
-                    className="block w-5/6 mx-auto h-14 mb-2 border border-teal-500"
+                    className={button_style}
                     onClick={(e) => logout(e)}
                 >
-                    Logout
+                    Выйти
                 </button>
             </div>
         </div>

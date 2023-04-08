@@ -25,13 +25,15 @@ export default class LessonService {
         return $api.get(`teacher/lesson/${id}/`)
     }
 
-
-
     static async updateLesson(lesson) {
         return $api.patch(`teacher/lesson/${lesson.id}/`, lesson,{
             headers: {
                 "Content-Type": "multipart/form-data"
             }
         })
+    }
+
+    static async deleteLesson(id) {
+        return $api.delete(`teacher/lesson/${id}/`)
     }
 }
