@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {useFetching} from "../hooks/useFetching";
-import CategoryService from "../services/CategoryService";
+import {useFetching} from "../../hooks/useFetching";
+import CategoryService from "../../services/CategoryService";
 import {useParams} from "react-router-dom";
-import CourseService from "../services/CourseService";
-import CourseTheme from "../components/CourseTheme";
+import CourseService from "../../services/CourseService";
+import CourseTheme from "../../components/CourseTheme";
 
 const UpdateCourse = () => {
     const {id} = useParams()

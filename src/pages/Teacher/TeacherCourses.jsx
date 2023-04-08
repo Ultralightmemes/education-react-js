@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {useFetching} from "../hooks/useFetching";
-import CourseService from "../services/CourseService";
-import CourseTeacherCard from "../components/CourseTeacherCard";
+import {useFetching} from "../../hooks/useFetching";
+import CourseService from "../../services/CourseService";
+import CourseTeacherCard from "../../components/CourseTeacherCard";
 import {Link} from "react-router-dom";
 
 const TeacherCourses = () => {

@@ -23,11 +23,16 @@ const CourseTheme = ({id}) => {
                 to={`/teacher/theme/create/${id}`}>
                 Добавить
             </Link>
-            {themes.map(theme => <Link
-                className="border w-full"
-                to={`/teacher/theme/${theme.id}/`}>
-                {theme.title}
-            </Link>)}
+            {themes.map(theme => <div className="w-full flex">
+                    <Link
+                        className="border w-full"
+                        to={`/teacher/theme/${theme.id}/`}>
+                        {theme.position}
+                    </Link>
+                    {/*<button className="w-1/6 block">f</button>*/}
+                    {/*<button className="w-1/6 block">f</button>*/}
+                </div>
+            )}
         </div>
     );
 };

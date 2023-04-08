@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {useFetching} from "../hooks/useFetching";
-import CourseService from "../services/CourseService";
-import CategoriesSidebar from "../components/CategoriesSidebar";
-import CourseCard from "../components/CourseCard";
+import {useFetching} from "../../hooks/useFetching";
+import CourseService from "../../services/CourseService";
+import CategoriesSidebar from "../../components/CategoriesSidebar";
+import CourseCard from "../../components/CourseCard";
 import {observer} from "mobx-react-lite";
 
 const CourseListPage = observer(() => {

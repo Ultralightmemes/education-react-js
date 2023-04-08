@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {useFetching} from "../hooks/useFetching";
-import LessonService from "../services/LessonService";
+import {useFetching} from "../../hooks/useFetching";
+import LessonService from "../../services/LessonService";
 import {useParams} from "react-router-dom";
-import SideThemes from "../components/SideThemes";
+import SideThemes from "../../components/SideThemes";
 import ReactPlayer from "react-player";
-import {API_URL} from "../http";
-import Loader from "../components/UI/Loader/Loader";
-import {Context} from "../index";
+import {API_URL} from "../../http";
+import Loader from "../../components/UI/Loader/Loader";
+import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
-import Tasks from "../components/Tasks";
+import Tasks from "../../components/Tasks";
 
 const Lesson = observer(() => {
     const {id} = useParams()
@@ -72,7 +72,7 @@ const Lesson = observer(() => {
                         onClick={handlePrevClick}
                         className="fixed bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25 -ml-3"
                     >
-                        <img src="/keyboard-left-arrow-button_icon-icons.com_72692.png"/>
+                        <img src="/public/keyboard-left-arrow-button_icon-icons.com_72692.png"/>
                     </button>
                 }
                 {nextURL &&
@@ -80,7 +80,7 @@ const Lesson = observer(() => {
                         onClick={handleNextClick}
                         className="fixed left-3/4 bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25 -ml-3"
                     >
-                        <img src="/keyboard-right-arrow-button_icon-icons.com_72691.png"/>
+                        <img src="/public/keyboard-right-arrow-button_icon-icons.com_72691.png"/>
                     </button>
                 }
                 {isLessonLoading &&

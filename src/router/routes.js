@@ -1,15 +1,15 @@
-import CourseListPage from "../pages/CourseListPage";
-import Registration from "../pages/Registration";
-import Profile from "../pages/Profile";
-import CourseDetailPage from "../pages/CourseDetailPage";
-import UserCourses from "../pages/UserCourses";
-import Lesson from "../pages/Lesson";
-import CategoryPage from "../pages/CategoryPage";
-import TeacherCourses from "../pages/TeacherCourses";
-import CreateCourse from "../pages/CreateCourse";
-import UpdateCourse from "../pages/UpdateCourse";
-import CreateTheme from "../pages/CreateTheme";
-import UpdateTheme from "../pages/UpdateTheme";
+import CourseListPage from "../pages/User/CourseListPage";
+import Registration from "../pages/User/Registration";
+import Profile from "../pages/User/Profile";
+import CourseDetailPage from "../pages/User/CourseDetailPage";
+import UserCourses from "../pages/User/UserCourses";
+import Lesson from "../pages/User/Lesson";
+import CategoryPage from "../pages/User/CategoryPage";
+import TeacherCourses from "../pages/Teacher/TeacherCourses";
+import CreateCourse from "../pages/Teacher/CreateCourse";
+import UpdateCourse from "../pages/Teacher/UpdateCourse";
+import CreateTheme from "../pages/Teacher/CreateTheme";
+import UpdateTheme from "../pages/Teacher/UpdateTheme";
 
 export const publicRoutes = [
     {path: '/courses', element: <CourseListPage/>},

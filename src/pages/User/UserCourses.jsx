@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {useFetching} from "../hooks/useFetching";
-import CourseService from "../services/CourseService";
-import StudentCourseCard from "../components/StudentCourseCard";
+import {useFetching} from "../../hooks/useFetching";
+import CourseService from "../../services/CourseService";
+import StudentCourseCard from "../../components/StudentCourseCard";
 
 const UserCourses = () => {
     const [courses, setCourses] = useState([])

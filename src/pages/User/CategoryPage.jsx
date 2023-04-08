@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import {useFetching} from "../hooks/useFetching";
-import CategoryService from "../services/CategoryService";
-import CategoriesSidebar from "../components/CategoriesSidebar";
-import CourseCard from "../components/CourseCard";
+import {useFetching} from "../../hooks/useFetching";
+import CategoryService from "../../services/CategoryService";
+import CategoriesSidebar from "../../components/CategoriesSidebar";
+import CourseCard from "../../components/CourseCard";
 
 const CategoryPage = () => {
     const {id} = useParams()

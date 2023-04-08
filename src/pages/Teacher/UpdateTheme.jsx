@@ -1,20 +1,28 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {useFetching} from "../../hooks/useFetching";
 import {useParams} from "react-router-dom";
-import ThemeService from "../services/ThemeService";
+import ThemeService from "../../services/ThemeService";
+import LessonService from "../../services/LessonService";
+import CourseTheme from "../../components/CourseTheme";
+import ThemeLesson from "../../components/ThemeLesson";
 
-const CreateTheme = () => {
+const UpdateTheme = () => {
     const {id} = useParams()
-    const [theme, setTheme] = useState({
-        title: '',
-        description: '',
-        position: 1,
-        is_published: false,
-        num_lessons: null
+    const [theme, setTheme] = useState({})
+
+    const [fetchTheme, isThemeLoading, ThemeError] = useFetching(async () => {
+        const response = await ThemeService.getTeacherTheme(id)
+        setTheme(response.data)
     })
 
-    const createTheme = (e) => {
+    useEffect(() => {
+        fetchTheme()
+    }, [])
+
+    const updateTheme = (e) => {
         e.preventDefault()
-        const response = ThemeService.createTheme(id, theme)
+        const response = ThemeService.updateTheme(theme)
+        console.log(theme)
     }
 
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
@@ -24,7 +32,7 @@ const CreateTheme = () => {
     return (
         <div className="flex justify-center items-center">
             <form className="w-2/3 text-center">
-                <h1 className="mx-auto text-4xl mb-7">Создание курса</h1>
+                <h1 className="mx-auto text-4xl mb-7">{theme.title}</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">
                     <div>
                         <div>
@@ -33,6 +41,7 @@ const CreateTheme = () => {
                             </label>
                             <input
                                 className={input_style} type="text"
+                                defaultValue={theme.title}
                                 onChange={e => setTheme({...theme, title: e.target.value})}
                             />
                         </div>
@@ -41,8 +50,9 @@ const CreateTheme = () => {
                                 <span className="mr-2">Опубликовать</span>
                                 <input
                                     className={input_style}
+                                    defaultChecked={theme.is_published}
                                     type="checkbox"
-                                    onChange={e => setTheme({...theme, is_published: e.target.checked})}
+                                    onInput={e => setTheme({...theme, is_published: !theme.is_published})}
                                 />
                             </label>
                         </div>
@@ -53,6 +63,7 @@ const CreateTheme = () => {
                         Описание
                     </label>
                     <textarea
+                        defaultValue={theme.description}
                         className={input_style}
                         onChange={e => setTheme({...theme, description: e.target.value})}
                     />
@@ -62,10 +73,18 @@ const CreateTheme = () => {
                         <button
                             className="mt-7 bg-blue-500 hover:bg-blue-700 text-2xl text-white font-bold py-2 px-4
                             rounded"
-                            onClick={e => createTheme(e)}
-                            >
-                            Создать
+                            onClick={e => updateTheme(e)}
+                        >
+                            Изменить
                         </button>
+                    </div>
+                    <div className="flex w-1/3 mt-4 flex-col">
+                        <h2 className="text-2xl mx-auto block">
+                            Уроки
+                        </h2>
+                        <div className="w-full">
+                            <ThemeLesson id={id}/>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -73,4 +92,4 @@ const CreateTheme = () => {
     );
 };
 
-export default CreateTheme;
+export default UpdateTheme;

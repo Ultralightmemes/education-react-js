@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {useFetching} from "../hooks/useFetching";
-import CourseService from "../services/CourseService";
+import {useFetching} from "../../hooks/useFetching";
+import CourseService from "../../services/CourseService";
 import {useParams} from "react-router-dom";
-import {API_URL} from "../http";
-import ThemeTab from "../components/ThemeTab";
-import Rating from "../components/Rating";
+import {API_URL} from "../../http";
+import ThemeTab from "../../components/ThemeTab";
+import Rating from "../../components/Rating";
 
 const CourseDetailPage = () => {
     const {id} = useParams()

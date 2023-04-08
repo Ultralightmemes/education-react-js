@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {useFetching} from "../hooks/useFetching";
-import CategoryService from "../services/CategoryService";
-import CourseService from "../services/CourseService";
-import CourseTheme from "../components/CourseTheme";
+import {useFetching} from "../../hooks/useFetching";
+import CategoryService from "../../services/CategoryService";
+import CourseService from "../../services/CourseService";
+import CourseTheme from "../../components/CourseTheme";
 import {Link} from "react-router-dom";
 
 const CreateCourse = () => {

@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
-import MyInput from "../components/UI/input/MyInput";
-import MyButton from "../components/UI/button/MyButton";
-import {Context} from "../index";
+import MyInput from "../../components/UI/input/MyInput";
+import MyButton from "../../components/UI/button/MyButton";
+import {Context} from "../../index";
 
 const Registration = () => {
     const [user, setUser] = useState({email: '', password: '', firstName: '', lastName: ''})

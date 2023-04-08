@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
-import MyButton from "../components/UI/button/MyButton";
-import {Context} from "../index";
-import {useFetching} from "../hooks/useFetching";
-import UserService from "../services/UserService";
+import MyButton from "../../components/UI/button/MyButton";
+import {Context} from "../../index";
+import {useFetching} from "../../hooks/useFetching";
+import UserService from "../../services/UserService";
 import {Link} from "react-router-dom";
 
 const Profile = () => {
@@ -55,7 +55,7 @@ const Profile = () => {
                         ?
                         <img src={user.image} className="w-72 h-72 mx-auto" alt="Profile"/>
                         :
-                        <img src="/user.png" className="w-72 h-72 mx-auto" alt="Profile"/>
+                        <img src="/public/user.png" className="w-72 h-72 mx-auto" alt="Profile"/>
                 }
                 <form>
                     <div className="flex items-center justify-center w-full my-2">
