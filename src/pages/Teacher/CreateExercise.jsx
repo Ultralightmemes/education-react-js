@@ -26,7 +26,7 @@ const CreateExercise = () => {
     return (
         <div className="flex justify-center items-center">
             <form className="w-2/3 text-center">
-                <h1 className="mx-auto text-4xl mb-7">Создание урока</h1>
+                <h1 className="mx-auto text-4xl mb-7">Создание задания</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">
                     <div>
                         <div>

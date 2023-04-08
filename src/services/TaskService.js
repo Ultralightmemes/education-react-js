@@ -24,4 +24,16 @@ export default class TaskService {
     static async createTest(id, test) {
         return $api.post(`teacher/lesson/${id}/test/`, test)
     }
+
+    static async getTeacherExercise(id) {
+        return $api.get(`teacher/exercise/${id}/`)
+    }
+
+    static async updateExercise(exercise) {
+        return $api.patch(`teacher/exercise/${exercise.id}/`, exercise)
+    }
+
+    static async deleteExercise(id) {
+        return $api.delete(`teacher/exercise/${id}/`)
+    }
 }

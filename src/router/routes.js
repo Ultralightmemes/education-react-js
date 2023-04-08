@@ -13,6 +13,7 @@ import UpdateTheme from "../pages/Teacher/UpdateTheme";
 import CreateLesson from "../pages/Teacher/CreateLesson";
 import UpdateLesson from "../pages/Teacher/UpdateLesson";
 import CreateExercise from "../pages/Teacher/CreateExercise";
+import UpdateExercise from "../pages/Teacher/UpdateExercise";
 
 export const publicRoutes = [
     {path: '/courses', element: <CourseListPage/>},
@@ -29,9 +30,10 @@ export const privateRoutes = [
     {path: '/teacher/courses', element: <TeacherCourses/>},
     {path: '/teacher/course/create', element: <CreateCourse/>},
     {path: '/teacher/course/:id', element: <UpdateCourse/>},
-    {path: 'teacher/theme/create/:id', element: <CreateTheme/>},
-    {path: 'teacher/theme/:id', element: <UpdateTheme/>},
-    {path: 'teacher/lesson/create/:id', element: <CreateLesson/>},
-    {path: 'teacher/lesson/:id', element: <UpdateLesson/>},
-    {path: 'teacher/exercise/create/:id', element: <CreateExercise/>},
+    {path: '/teacher/theme/create/:id', element: <CreateTheme/>},
+    {path: '/teacher/theme/:id', element: <UpdateTheme/>},
+    {path: '/teacher/lesson/create/:id', element: <CreateLesson/>},
+    {path: '/teacher/lesson/:id', element: <UpdateLesson/>},
+    {path: '/teacher/exercise/create/:id', element: <CreateExercise/>},
+    {path: '/teacher/exercise/:id', element: <UpdateExercise/>},
 ]
