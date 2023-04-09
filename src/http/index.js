@@ -34,6 +34,9 @@ $api.interceptors.response.use((config) => {
             return $api.request(originalRequest)
         } catch (e) {
             console.log('Не авторизован')
+            localStorage.removeItem('access')
+            localStorage.removeItem('refresh')
+            window.location.reload()
         }
     }
 })

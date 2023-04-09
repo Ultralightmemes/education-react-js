@@ -23,6 +23,7 @@ const CreateLesson = () => {
     const createLesson = async (e) => {
         e.preventDefault()
         await LessonService.createLesson(id, lesson).then(response => {
+            console.log(response)
             navigate(`/teacher/lesson/${response.data.id}`)
         })
     }

@@ -75,7 +75,7 @@ const Lesson = observer(() => {
                         onClick={handlePrevClick}
                         className="fixed bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25 -ml-3"
                     >
-                        <img src="/public/keyboard-left-arrow-button_icon-icons.com_72692.png"/>
+                        <img src="/keyboard-left-arrow-button_icon-icons.com_72692.png" alt="<"/>
                     </button>
                 }
                 {nextURL &&
@@ -83,7 +83,7 @@ const Lesson = observer(() => {
                         onClick={handleNextClick}
                         className="fixed left-3/4 bg-gray-500 w-7 h-14 top-1/2 -mt-10 z-10 opacity-25 -ml-3"
                     >
-                        <img src="/public/keyboard-right-arrow-button_icon-icons.com_72691.png"/>
+                        <img src="/keyboard-right-arrow-button_icon-icons.com_72691.png" alt=">"/>
                     </button>
                 }
                 {isLessonLoading &&
