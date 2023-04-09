@@ -76,6 +76,7 @@ const Profile = () => {
                             <input id="dropzone-file"
                                    type="file"
                                    className="hidden"
+                                   accept="image/jpeg, image/png"
                                    onChange={(event) => setImage(event.target.files[0])}
                             />
                         </label>

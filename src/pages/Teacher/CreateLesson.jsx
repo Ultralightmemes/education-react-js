@@ -73,6 +73,7 @@ const CreateLesson = () => {
                             <input id="dropzone-file"
                                    type="file"
                                    className="hidden"
+                                   accept="video/mp4"
                                    onChange={e => setLesson({...lesson, video: e.target.files[0]})}
                             />
                         </label>

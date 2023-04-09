@@ -94,11 +94,12 @@ const CreateCourse = () => {
                                           0l-3 3m3-3v12"></path>
                                 </svg>
                                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
-                                    className="font-semibold">Нажмите чтобы загрузить изрбражение</span></p>
+                                    className="font-semibold">Нажмите чтобы загрузить изображение</span></p>
                             </div>
                             <input id="dropzone-file"
                                    type="file"
                                    className="hidden"
+                                   accept="image/jpeg, image/png"
                                    onChange={(event) => setImage(event.target.files[0])}
                             />
                         </label>
