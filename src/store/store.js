@@ -9,6 +9,12 @@ export default class Store {
     title = null
     lesson = 1
 
+    course_id = null
+    theme_id = null
+    lesson_id = null
+    exercise_id = null
+    test_id = null
+
     constructor() {
         makeAutoObservable(this);
     }
@@ -35,6 +41,44 @@ export default class Store {
 
     delLesson() {
         this.lesson = 1
+    }
+
+    delIds() {
+        this.course_id = null
+        this.theme_id = null
+        this.lesson_id = null
+        this.exercise_id = null
+        this.test_id = null
+    }
+
+    setCourseId(id) {
+        this.course_id = id
+        this.theme_id = null
+        this.lesson_id = null
+        this.exercise_id = null
+        this.test_id = null
+    }
+
+    setThemeId(id) {
+        this.theme_id = id
+        this.lesson_id = null
+        this.exercise_id = null
+        this.test_id = null
+    }
+
+    setLessonId(id) {
+        this.lesson_id = id
+        this.exercise_id = null
+        this.test_id = null
+    }
+
+    setExerciseId(id) {
+        this.exercise_id = id
+        this.test_id = null
+    }
+
+    setTestId(id) {
+        this.test_id = id
     }
 
     async login(email, password) {

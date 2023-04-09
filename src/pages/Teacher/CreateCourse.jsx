@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import CategoryService from "../../services/CategoryService";
 import CourseService from "../../services/CourseService";
 import {useNavigate} from "react-router-dom";
+import SideTeacherNavigation from "../../components/SideTeacherNavigation";
+import {Context} from "../../index";
 
 const CreateCourse = () => {
     const navigate = useNavigate()
@@ -12,6 +14,7 @@ const CreateCourse = () => {
     const [image, setImage] = useState('')
     const [isPublished, setIsPublished] = useState(false)
     const [chosenCategories, setChosenCategories] = useState([])
+    const {store} = useContext(Context)
 
     const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(async () => {
         const response = await CategoryService.getCategories()
@@ -42,6 +45,7 @@ const CreateCourse = () => {
     }
 
     useEffect(() => {
+        store.delIds()
         fetchCategories()
     }, [])
 
@@ -50,8 +54,8 @@ const CreateCourse = () => {
         "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
     return (
-        <div className="flex justify-center items-center">
-
+        <div className="flex">
+            <SideTeacherNavigation/>
             <form className="w-2/3 text-center">
                 <h1 className="mx-auto text-4xl mb-7">Создание курса</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">

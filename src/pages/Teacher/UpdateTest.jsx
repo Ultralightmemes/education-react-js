@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
 import TaskService from "../../services/TaskService";
+import SideTeacherNavigation from "../../components/SideTeacherNavigation";
+import {Context} from "../../index";
 
 const UpdateTest = () => {
     const navigate = useNavigate()
@@ -9,15 +11,16 @@ const UpdateTest = () => {
     const [test, setTest] = useState({})
     const [testOptions, setTestOptions] = useState([])
     const [optionsCounter, setOptionsCounter] = useState(3)
+    const {store} = useContext(Context)
 
     const [fetchTest, isTestLoading, TestError] = useFetching(async () => {
         const response = await TaskService.getTeacherTest(id)
         setTest(response.data)
+        store.setLessonId(response.data.lesson)
     })
 
     const [fetchOptions, isOptionsLoading, OptionsError] = useFetching(async () => {
         const response = await TaskService.getOptions(id)
-        console.log(response.data)
         setTestOptions(response.data)
         setOptionsCounter(response.data[response.data.length - 1].id + 1)
     })
@@ -72,7 +75,8 @@ const UpdateTest = () => {
         "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex">
+            <SideTeacherNavigation/>
             <form className="w-2/3 text-center">
                 <h1 className="mx-auto text-4xl mb-7">Создание теста</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">

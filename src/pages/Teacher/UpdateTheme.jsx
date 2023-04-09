@@ -1,17 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import {useNavigate, useParams} from "react-router-dom";
 import ThemeService from "../../services/ThemeService";
 import ThemeLesson from "../../components/ThemeLesson";
+import SideTeacherNavigation from "../../components/SideTeacherNavigation";
+import {Context} from "../../index";
 
 const UpdateTheme = () => {
     const navigate = useNavigate()
     const {id} = useParams()
     const [theme, setTheme] = useState({})
+    const {store} = useContext(Context)
 
     const [fetchTheme, isThemeLoading, ThemeError] = useFetching(async () => {
         const response = await ThemeService.getTeacherTheme(id)
         setTheme(response.data)
+        store.setCourseId(response.data.course_id)
     })
 
     useEffect(() => {
@@ -36,7 +40,8 @@ const UpdateTheme = () => {
         "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex">
+            <SideTeacherNavigation/>
             <form className="w-2/3 text-center">
                 <h1 className="mx-auto text-4xl mb-7">Тема: {theme.title}</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">

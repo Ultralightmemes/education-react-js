@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import ThemeService from "../../services/ThemeService";
+import SideTeacherNavigation from "../../components/SideTeacherNavigation";
+import {Context} from "../../index";
 
 const CreateTheme = () => {
     const navigate = useNavigate()
@@ -12,6 +14,7 @@ const CreateTheme = () => {
         is_published: false,
         num_lessons: null
     })
+    const {store} = useContext(Context)
 
     const createTheme = async (e) => {
         e.preventDefault()
@@ -20,12 +23,17 @@ const CreateTheme = () => {
         })
     }
 
+    useEffect(() => {
+        store.setCourseId(id)
+    },[])
+
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
         "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " +
         "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex">
+            <SideTeacherNavigation/>
             <form className="w-2/3 text-center">
                 <h1 className="mx-auto text-4xl mb-7">Создание темы</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">

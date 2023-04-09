@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
 import LessonService from "../../services/LessonService";
 import LessonTask from "../../components/LessonTask";
+import SideTeacherNavigation from "../../components/SideTeacherNavigation";
+import {Context} from "../../index";
 
 const UpdateLesson = () => {
     const {id} = useParams()
@@ -13,10 +15,12 @@ const UpdateLesson = () => {
         position: 1,
         text: '',
     })
+    const {store} = useContext(Context)
 
     const [fetchLesson, isLessonLoading, LessonError] = useFetching(async () => {
         const response = await LessonService.getTeacherLesson(id)
         setLesson(response.data)
+        store.setThemeId(response.data.theme)
     })
 
     useEffect(() => {
@@ -43,7 +47,8 @@ const UpdateLesson = () => {
         "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex">
+            <SideTeacherNavigation/>
             <form className="w-2/3 text-center">
                 <h1 className="mx-auto text-4xl mb-7">Урок: {lesson.title}</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">

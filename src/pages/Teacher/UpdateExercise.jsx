@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useFetching} from "../../hooks/useFetching";
 import TaskService from "../../services/TaskService";
+import SideTeacherNavigation from "../../components/SideTeacherNavigation";
+import {Context} from "../../index";
 
 const UpdateExercise = () => {
     const {id} = useParams()
@@ -12,10 +14,12 @@ const UpdateExercise = () => {
         className: 'ExerciseTask',
         answer: ''
     })
+    const {store} = useContext(Context)
 
     const [fetchExercise, isExerciseLoading, ExerciseError] = useFetching(async () => {
         const response = await TaskService.getTeacherExercise(id)
         setExercise(response.data)
+        store.setLessonId(response.data.lesson)
     })
 
     useEffect(() => {
@@ -40,7 +44,8 @@ const UpdateExercise = () => {
         "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex">
+            <SideTeacherNavigation/>
             <form className="w-2/3 text-center">
                 <h1 className="mx-auto text-4xl mb-7">Задание: {exercise.title}</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">

@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import LessonService from "../../services/LessonService";
+import SideTeacherNavigation from "../../components/SideTeacherNavigation";
+import {Context} from "../../index";
 
 const CreateLesson = () => {
     const navigate = useNavigate()
@@ -12,6 +14,7 @@ const CreateLesson = () => {
         text: '',
         is_published: false,
     })
+    const {store} = useContext(Context)
 
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
         "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " +
@@ -24,8 +27,11 @@ const CreateLesson = () => {
         })
     }
 
+    store.setThemeId(id)
+
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex">
+            <SideTeacherNavigation/>
             <form className="w-2/3 text-center">
                 <h1 className="mx-auto text-4xl mb-7">Создание урока</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">

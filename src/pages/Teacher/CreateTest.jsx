@@ -1,6 +1,8 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import TaskService from "../../services/TaskService";
+import {Context} from "../../index";
+import SideTeacherNavigation from "../../components/SideTeacherNavigation";
 
 const CreateTest = () => {
     const navigate = useNavigate()
@@ -22,6 +24,7 @@ const CreateTest = () => {
         ],
     })
     const [optionsCounter, setOptionsCounter] = useState(3)
+    const {store} = useContext(Context)
 
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
         "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " +
@@ -30,7 +33,7 @@ const CreateTest = () => {
     const createTest = (e) => {
         e.preventDefault()
         TaskService.createTest(id, test).then(response => {
-            navigate(`/teacher/test/${id}`)
+            navigate(`/teacher/test/${response.data.id}`)
         })
     }
 
@@ -45,6 +48,8 @@ const CreateTest = () => {
         setTest({...test, options: updatedOptions});
     }
 
+    store.setLessonId(id)
+
     const handleAddOptionClick = (e) => {
         e.preventDefault()
         const newOption = {
@@ -57,7 +62,8 @@ const CreateTest = () => {
     }
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex">
+            <SideTeacherNavigation/>
             <form className="w-2/3 text-center">
                 <h1 className="mx-auto text-4xl mb-7">Создание теста</h1>
                 <div className="grid gap-6 mb-4 md:grid-cols-2">
