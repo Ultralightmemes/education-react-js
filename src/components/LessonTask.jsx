@@ -35,7 +35,7 @@ const LessonTask = ({id}) => {
             </Link>
             <Link
                 className="border w-full text-l py-1 hover:bg-yellow-100"
-                to={`/teacher/lesson/create/${id}`}>
+                to={`/teacher/test/create/${id}`}>
                 Добавить тест
             </Link>
             {exercises.map(exercise => <div className="w-full flex" key={exercise.id}>
@@ -48,7 +48,7 @@ const LessonTask = ({id}) => {
             {tests.map(test => <div className="w-full flex" key={test.id}>
                 <Link
                     className="border w-full text-l py-1 hover:bg-amber-100"
-                    to={`/teacher/lesson/${test.id}`}>
+                    to={`/teacher/test/${test.id}`}>
                     {test.title}
                 </Link>
             </div>)}

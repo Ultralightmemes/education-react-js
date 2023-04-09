@@ -14,6 +14,7 @@ import CreateLesson from "../pages/Teacher/CreateLesson";
 import UpdateLesson from "../pages/Teacher/UpdateLesson";
 import CreateExercise from "../pages/Teacher/CreateExercise";
 import UpdateExercise from "../pages/Teacher/UpdateExercise";
+import CreateTest from "../pages/Teacher/CreateTest";
 
 export const publicRoutes = [
     {path: '/courses', element: <CourseListPage/>},
@@ -36,4 +37,5 @@ export const privateRoutes = [
     {path: '/teacher/lesson/:id', element: <UpdateLesson/>},
     {path: '/teacher/exercise/create/:id', element: <CreateExercise/>},
     {path: '/teacher/exercise/:id', element: <UpdateExercise/>},
+    {path: '/teacher/test/create/:id', element: <CreateTest/>},
 ]
