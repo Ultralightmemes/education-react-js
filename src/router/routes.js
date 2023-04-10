@@ -18,6 +18,7 @@ import CreateTest from "../pages/Teacher/CreateTest";
 import UpdateTest from "../pages/Teacher/UpdateTest";
 
 export const publicRoutes = [
+    {path: '/', element: <CourseListPage/>},
     {path: '/courses', element: <CourseListPage/>},
     {path: '/registration', element: <Registration/>},
     {path: '/preview/:id', element: <CourseDetailPage/>},

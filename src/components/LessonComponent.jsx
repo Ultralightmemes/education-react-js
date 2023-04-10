@@ -9,7 +9,7 @@ const LessonComponent = ({lesson}) => {
         className += ' bg-blue-500 hover:bg-blue-600'
     }
     else {
-        className += ' hover:bg-gray-100'
+        className += ' hover:bg-gray-200'
     }
     return (
         <li>

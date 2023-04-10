@@ -17,7 +17,7 @@ const SideThemes = ({id}) => {
 
     return (
         <aside className="w-1/4" aria-label="Sidebar">
-            <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800 ">
+            <div className="overflow-y-auto py-4 px-3 bg-gray-100 rounded">
                 <ul className="space-y-2">
                     {themes.map(theme => <ThemeWithLessons theme={theme}
                                                            key={theme.id}/>)}

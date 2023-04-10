@@ -8,7 +8,7 @@ const CategoryElement = ({category, id = null}) => {
         classname += " bg-blue-500 hover:bg-blue-600"
     } else {
         link = '/category/' + category.id
-        classname += " hover:bg-gray-100"
+        classname += " hover:bg-gray-200"
     }
     return (
         <li>

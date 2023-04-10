@@ -20,6 +20,11 @@ const CourseListPage = observer(() => {
         fetchCourses()
     }, [selectedSort, searchState])
 
+    const handleSearchSubmit = (e) => {
+        e.preventDefault()
+        setSearchState(!searchState)
+    }
+
     return (
         <div className="flex mx-auto w-11/12 ml-10">
             <CategoriesSidebar/>
@@ -33,7 +38,7 @@ const CourseListPage = observer(() => {
                         <option value={'publish_date'}> По дате публикации</option>
                         <option value={'update_date'}>По дате обновления</option>
                     </select>
-                    <div className="ml-3 w-4/5 flex">
+                    <form className="ml-3 w-4/5 flex">
                         <input
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
@@ -44,14 +49,14 @@ const CourseListPage = observer(() => {
                         />
                         <button
                             type="submit"
-                            onClick={() => setSearchState(!searchState)}
+                            onClick={e => handleSearchSubmit(e)}
                             className="text-white right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800
                                 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-r-lg text-sm
                                 px-4 py-2"
                         >
                             Search
                         </button>
-                    </div>
+                    </form>
                 </div>
                 {courses.length === 0 ?
                     <div className="w-11/12">

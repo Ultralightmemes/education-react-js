@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import $api from "../http";
 import Task from "./Task";
 import {useFetching} from "../hooks/useFetching";
 import TaskService from "../services/TaskService";
