@@ -155,13 +155,15 @@ const Profile = () => {
                 >
                     Обновить изображение
                 </button>
-                <Link to='/teacher/courses'>
-                    <button
-                        className={button_style}
-                    >
-                        Мои курсы
-                    </button>
-                </Link>
+                {user.is_teacher &&
+                    <Link to='/teacher/courses'>
+                        <button
+                            className={button_style}
+                        >
+                            Мои курсы
+                        </button>
+                    </Link>
+                }
                 <button
                     className={button_style}
                     onClick={(e) => logout(e)}

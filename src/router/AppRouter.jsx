@@ -5,26 +5,28 @@ import Error from "../pages/User/Error";
 import {Context} from "../index";
 
 const AppRouter = () => {
+    const authRoutes = publicRoutes.concat(privateRoutes)
     const {store} = useContext(Context)
     return (
         <Routes>
-            store.isAuth
-            ?
-            {privateRoutes.map(route =>
-                <Route
-                    key={route.path}
-                    path={route.path}
-                    element={route.element}
-                />
-            )}
-            :
-            {publicRoutes.map(route =>
-                <Route
-                    key={route.path}
-                    path={route.path}
-                    element={route.element}
-                />
-            )}
+            {store.isAuth
+                ?
+                authRoutes.map(route =>
+                    <Route
+                        key={route.path}
+                        path={route.path}
+                        element={route.element}
+                    />
+                )
+                :
+                publicRoutes.map(route =>
+                    <Route
+                        key={route.path}
+                        path={route.path}
+                        element={route.element}
+                    />
+                )
+            }
             <Route path="*" element={<Error/>}/>
         </Routes>
     );
