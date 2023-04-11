@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import CourseService from "../../services/CourseService";
 import {useParams} from "react-router-dom";
 import {API_URL} from "../../http";
 import ThemeTab from "../../components/ThemeTab";
 import Rating from "../../components/Rating";
+import {Context} from "../../index";
 
 const CourseDetailPage = () => {
     const {id} = useParams()
@@ -29,6 +30,7 @@ const CourseDetailPage = () => {
         text: '',
         image: '',
     })
+    const {store} = useContext(Context)
 
     const [fetchCourse, isCourseLoading, courseError] = useFetching(async () => {
         const response = await CourseService.getById(id)
@@ -61,14 +63,26 @@ const CourseDetailPage = () => {
                     <h1 className="text-3xl">{course.name}</h1>
                 </div>
                 <div className="w-1/3">
-                    <button
-                        onClick={followCourse}
-                        className="w-5/12 hover:shadow-blue-500 hover:shadow-sm rounded-sm h-11 border border-black"
-                    >
-                        <h2 className="text-2xl">
-                            Подписаться
-                        </h2>
-                    </button>
+                    {store.isAuth ?
+                        <button
+                            onClick={followCourse}
+                            className="w-5/12 hover:shadow-blue-500 hover:shadow-sm rounded-sm h-11 border border-black
+                            cursor-pointer"
+                        >
+                            <h2 className="text-2xl">
+                                Подписаться
+                            </h2>
+                        </button>
+                        :
+                        <button
+                            className="w-5/12  rounded-sm h-11 border border-black bg-gray-200 cursor-pointer"
+                            disabled
+                        >
+                            <h2 className="text-2xl">
+                                Подписаться
+                            </h2>
+                        </button>
+                    }
                 </div>
             </div>
             <div className="container mx-auto gap-x-8 grid grid-cols-3 mt-4 w-11/12">
