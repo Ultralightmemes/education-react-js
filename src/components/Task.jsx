@@ -3,9 +3,9 @@ import React from 'react';
 const Task = ({task}) => {
     if (task.classname === 'ExerciseTask') {
         return (
-            <div className="ml-10 border border-black mt-4 pl-2">
+            <div className="ml-10 border border-black mt-4 pl-2 rounded-lg">
                 <label>{task.text}:</label>
-                <input className={"rounded-l border border-black mt-1 ml-2 mb-1 block " + task.classname}
+                <input className={"rounded-l border border-black mt-1 ml-2 mb-2 block " + task.classname}
                        id={task.id.toString()} type="text"/>
             </div>
         )
@@ -14,7 +14,7 @@ const Task = ({task}) => {
         if (!task.radio)
             type = 'checkbox'
         return (
-            <div className="ml-10 border border-black mt-4 pl-2">
+            <div className="ml-10 border border-black mt-4 pl-2 rounded-lg">
                 <label>{task.text}:</label>
                 <fieldset id={task.id.toString()} className={task.classname}>
                     {task.options.map(option =>

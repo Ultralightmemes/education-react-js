@@ -38,7 +38,6 @@ const Tasks = ({id}) => {
             exercise.answer = (raw_exercises[i]).value
             exercises_answers.push(exercise)
         }
-        // console.log(exercises)
         let tests_answers = []
         let raw_tests = document.getElementsByClassName('TestTask')
         const emptyTests = () => ({
