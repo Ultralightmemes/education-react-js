@@ -5,11 +5,10 @@ const CourseCard = ({course}) => {
     const handleImageError = (event) => {
         event.target.src = '/No_image_available.svg.png';
     };
-    console.log(course)
     return (
         <div>
             <Link to={'/preview/' + course.id}>
-                <div className="rounded overflow-hidden shadow-lg h-72 w-80 mb-3">
+                <div className="rounded overflow-hidden shadow-lg h-72 mb-3">
                     <img className="h-44 w-44 mx-auto mt-2"
                          src={course.image ? course.image : '/No_image_available.svg.png'}
                          alt="CourseCard"

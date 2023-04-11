@@ -16,7 +16,7 @@ const StudentCourseCard = ({course}) => {
     };
 
     return (
-        <div className="rounded overflow-hidden shadow-lg h-[290px] w-80 mb-3">
+        <div className="rounded overflow-hidden shadow-lg h-[290px] mb-3">
             <Link to={'/course/' + course.id + '/lesson'} onClick={() => store.delLesson()}>
                 <div>
                     <img className="h-44 w-44 mx-auto mt-2"

@@ -17,7 +17,7 @@ const UserCourses = () => {
 
     return (
         <div className="flex ml-6 justify-center items-center">
-            <div className="w-2/3 gap-x-20 grid grid-cols-3">
+            <div className="w-2/3 gap-x-4 grid grid-cols-3">
                 {courses?.map(course => <StudentCourseCard course={course} key={course.id}/>)}
             </div>
         </div>
