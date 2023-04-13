@@ -1,20 +1,19 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import Rating from "./Rating";
 import {API_URL} from "../http";
 
-const CourseCard = ({course, absoluteURL = true}) => {
+const BigCard = ({course}) => {
     const handleImageError = (event) => {
         event.target.src = '/No_image_available.svg.png';
     };
+
     return (
         <div>
             <Link to={'/preview/' + course.id}>
-                <div className="rounded overflow-hidden shadow-lg h-72 mb-3 bg-white bg-opacity-90">
-                    <img className="h-44 w-44 mx-auto mt-2"
-                         src={course.image ?
-                             (absoluteURL ? course.image : API_URL.substring(0, API_URL.length - 1) + course.image)
-                             :
-                             '/No_image_available.svg.png'}
+                <div className="rounded overflow-hidden shadow-lg h-full mb-3 bg-white bg-opacity-90  items-center text-center justify-center">
+                    <img className="h-60 w-60 mx-auto mt-2"
+                         src={course.image ? API_URL.substring(0, API_URL.length - 1) + course.image : '/No_image_available.svg.png'}
                          alt="CourseCard"
                          id={course.id}
                          onError={handleImageError}
@@ -22,18 +21,20 @@ const CourseCard = ({course, absoluteURL = true}) => {
                     <div className="px-6 py-4">
                         <div className="text-xl">
                             <p className="whitespace-normal text-lg text-center">
-                                {
-                                    course.name.length > 25
-                                        ?
-                                        course.name.substring(0, 25) + '...'
-                                        :
-                                        course.name
-                                }
+                                {course.name}
                             </p>
                         </div>
                     </div>
+                    <div className="w-3/12 mx-auto mb-5">
+                        <Rating
+                            courseRating={course.rating}
+                            isActive={false}
+                            courseId={course.id}
+                        />
+                    </div>
                     <div className="px-6 pb-2 max-w-fit max-h-min">
-                        {course.categories.slice(0, 2).map(category =>
+                        {course.categories &&
+                            course.categories.map(category =>
                             <span
                                 key={category.id}
                                 className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold
@@ -48,4 +49,4 @@ const CourseCard = ({course, absoluteURL = true}) => {
     );
 };
 
-export default CourseCard;
+export default BigCard;

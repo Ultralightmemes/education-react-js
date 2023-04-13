@@ -54,4 +54,12 @@ export default class CourseService {
     static async deleteCourse(id) {
         return $api.delete(`teacher/course/${id}/`)
     }
+
+    static async getBest() {
+        return $api.get(`education/course/best/`)
+    }
+
+    static async getNewest() {
+        return $api.get(`education/course/new/`)
+    }
 }

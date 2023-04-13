@@ -16,9 +16,10 @@ import CreateExercise from "../pages/Teacher/CreateExercise";
 import UpdateExercise from "../pages/Teacher/UpdateExercise";
 import CreateTest from "../pages/Teacher/CreateTest";
 import UpdateTest from "../pages/Teacher/UpdateTest";
+import Main from "../pages/User/Main";
 
 export const publicRoutes = [
-    {path: '/', element: <CourseListPage/>},
+    {path: '/', element: <Main/>},
     {path: '/courses', element: <CourseListPage/>},
     {path: '/registration', element: <Registration/>},
     {path: '/preview/:id', element: <CourseDetailPage/>},

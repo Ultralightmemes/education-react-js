@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useFetching} from "../../hooks/useFetching";
 import CourseService from "../../services/CourseService";
 import CategoriesSidebar from "../../components/CategoriesSidebar";
