@@ -2,18 +2,19 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../index";
 import {useFetching} from "../../hooks/useFetching";
 import UserService from "../../services/UserService";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const Profile = () => {
+    const navigate = useNavigate()
     const [user, setUser] = useState(
         {
             email: '',
             first_name: '',
             last_name: '',
             patronymic: '',
-            image: null,
             is_staff: null,
             is_teacher: null,
+            image: ''
         })
     const [image, setImage] = useState(null)
 
@@ -31,6 +32,7 @@ const Profile = () => {
     const logout = (e) => {
         e.preventDefault()
         store.logout()
+        navigate('/')
     }
 
     const update = async (e) => {
@@ -43,6 +45,10 @@ const Profile = () => {
         const response = await UserService.updateImage(image)
     }
 
+    const handleImageError = (event) => {
+        event.target.src = '/user.png';
+    };
+
     const input_style = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 " +
         "focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " +
         "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -53,13 +59,10 @@ const Profile = () => {
             <div className="w-1/5">
             </div>
             <div className="w-2/5">
-                {
-                    user.image
-                        ?
-                        <img src={user.image} className="w-72 h-72 mx-auto" alt="Profile"/>
-                        :
-                        <img src="/public/user.png" className="w-72 h-72 mx-auto" alt="Profile"/>
-                }
+                <img src={user.image ? user.image : "/user.png"}
+                     className="w-72 h-72 mx-auto"
+                     alt="Profile"
+                     onError={handleImageError}/>
                 <form>
                     <div className="flex items-center justify-center w-full my-2">
                         <label htmlFor="dropzone-file"
@@ -106,7 +109,7 @@ const Profile = () => {
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Last Name
                             </label>
-                            <input type="text" i
+                            <input type="text"
                                    className={input_style}
                                    onChange={e => setUser({...user, last_name: e.target.value})}
                                    defaultValue={user.last_name}
@@ -155,7 +158,7 @@ const Profile = () => {
                 >
                     Обновить изображение
                 </button>
-                {(user.is_teacher | user.is_staff) &&
+                {user.is_teacher ?
                     <Link to='/teacher/courses'>
                         <button
                             className={button_style}
@@ -163,6 +166,8 @@ const Profile = () => {
                             Мои курсы
                         </button>
                     </Link>
+                    :
+                    null
                 }
                 <button
                     className={button_style}

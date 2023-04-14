@@ -2,14 +2,17 @@ import React, {useContext, useState} from 'react';
 import MyInput from "../../components/UI/input/MyInput";
 import MyButton from "../../components/UI/button/MyButton";
 import {Context} from "../../index";
+import {useNavigate} from "react-router-dom";
 
 const Registration = () => {
+    const navigate = useNavigate()
     const [user, setUser] = useState({email: '', password: '', firstName: '', lastName: ''})
     const {store} = useContext(Context)
 
     const register = (e) => {
         e.preventDefault()
         store.registration(user)
+        navigate('/')
     }
 
     return (

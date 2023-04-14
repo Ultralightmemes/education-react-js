@@ -3,9 +3,10 @@ import {Context} from "../index";
 import {observer} from "mobx-react-lite";
 import MyButton from "./UI/button/MyButton";
 import MyInput from "./UI/input/MyInput";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const LoginForm = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const {store} = useContext(Context)
@@ -13,6 +14,7 @@ const LoginForm = () => {
     const login = (e) => {
         e.preventDefault()
         store.login(email, password)
+        navigate('/')
     }
 
     return (
