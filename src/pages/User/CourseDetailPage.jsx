@@ -67,7 +67,7 @@ const CourseDetailPage = () => {
                         <button
                             onClick={followCourse}
                             className="w-5/12 hover:shadow-blue-500 hover:shadow-sm rounded-sm h-11 border border-black
-                            cursor-pointer"
+                            cursor-pointer focus:bg-blue-100"
                         >
                             <h2 className="text-2xl">
                                 Подписаться
@@ -75,7 +75,7 @@ const CourseDetailPage = () => {
                         </button>
                         :
                         <button
-                            className="w-5/12  rounded-sm h-11 border border-black bg-gray-200 cursor-pointer"
+                            className="w-5/12 rounded-sm h-11 border border-black bg-gray-200 cursor-pointer"
                             disabled
                         >
                             <h2 className="text-2xl">
