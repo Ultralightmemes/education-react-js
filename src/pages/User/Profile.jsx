@@ -158,7 +158,7 @@ const Profile = () => {
                 >
                     Обновить изображение
                 </button>
-                {user.is_teacher ?
+                {(user.is_teacher || user.is_staff) ?
                     <Link to='/teacher/courses'>
                         <button
                             className={button_style}
