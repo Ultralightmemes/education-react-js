@@ -54,6 +54,7 @@ const Profile = () => {
         "dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 
     const button_style = "block w-5/6 mx-auto h-14 mb-2 border border-gray-500 rounded-l"
+
     return (
         <div className="flex">
             <div className="w-1/5">

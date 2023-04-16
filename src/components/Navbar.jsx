@@ -4,12 +4,11 @@ import MyModal from "./UI/MyModal/MyModal";
 import LoginForm from "./LoginForm";
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
-import MyButton from "./UI/button/MyButton";
 
 const Navbar = () => {
-
     const [modal, setModal] = useState(false);
     const {store} = useContext(Context)
+    console.log(store.isAuth)
 
     return (
         <header className="h-[50px] flex justify-between px-5 bg-gray-500 items-center bg-white w-full shadow-md mb-5">

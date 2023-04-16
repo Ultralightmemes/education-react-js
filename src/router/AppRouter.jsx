@@ -3,8 +3,9 @@ import {Route, Routes} from "react-router-dom";
 import {publicRoutes, privateRoutes} from "./routes";
 import Error from "../pages/User/Error";
 import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
     const authRoutes = publicRoutes.concat(privateRoutes)
     const {store} = useContext(Context)
     return (
@@ -30,6 +31,6 @@ const AppRouter = () => {
             <Route path="*" element={<Error/>}/>
         </Routes>
     );
-};
+});
 
 export default AppRouter;
